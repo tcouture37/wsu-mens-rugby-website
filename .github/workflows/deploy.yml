@@ -40,4 +40,4 @@ jobs:
 
       # Optional: If using CloudFront, add cache invalidation
       - name: Invalidate CloudFront cache
-        run: aws cloudfront create-invalidation --distribution-id YOUR_DISTRIBUTION_ID --paths "/*"
+        run: aws cloudfront create-invalidation --distribution-id E3D9XCSIBE030X --paths "/*"
