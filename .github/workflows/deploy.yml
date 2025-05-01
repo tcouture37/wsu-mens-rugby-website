@@ -1,0 +1,43 @@
+name: Deploy to S3
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # If you're using a static site generator like Hugo, Jekyll, etc.,
+      # add build steps here
+      
+      # Example for a site that needs Node.js build process:
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: '16'
+      # - name: Install dependencies
+      #   run: npm ci
+      # - name: Build site
+      #   run: npm run build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1  # Change to your bucket's region
+
+      - name: Deploy to S3
+        run: |
+          aws s3 sync . s3://your-bucket-name --delete --exclude ".git/*" --exclude ".github/*"
+          # If using a build directory, replace "." with your build directory
+          # Example: aws s3 sync ./build s3://your-bucket-name --delete
+
+      # Optional: If using CloudFront, add cache invalidation
+      # - name: Invalidate CloudFront cache
+      #   run: aws cloudfront create-invalidation --distribution-id YOUR_DISTRIBUTION_ID --paths "/*"
