@@ -43,12 +43,12 @@ This repository contains the source code for the Winona State Men's Rugby team w
 ```
 rugby-team-website/
 ├── index.html          # Homepage
-├── team.html           # Team members page
-├── fixtures.html       # Upcoming matches
-├── results.html        # Past match results
-├── gallery.html        # Photo gallery
-├── contact.html        # Contact form
-├── donate.html         # Donation page
+├── team.html           # Team members page (not implemented)
+├── fixtures.html       # Upcoming matches (not implemented)
+├── results.html        # Past match results (not implemented)
+├── gallery.html        # Photo gallery (not implemented)
+├── contact.html        # Contact form (not implemented)
+├── donate.html         # Donation page (not implemented)
 ├── css/
 │   └── style.css       # Main stylesheet
 ├── js/
