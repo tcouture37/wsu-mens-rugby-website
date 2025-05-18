@@ -37,17 +37,7 @@
     --radius-full: 9999px;
 }
 
-.dark-mode {
-    --primary-color: #1e293b;
-    --primary-color-light: #334155;
-    --text-color: #f1f5f9;
-    --text-light: #cbd5e1;
-    --text-dark: #f8fafc;
-    --bg-color: #020617;
-    --bg-color-secondary: #0f172a;
-    --card-bg: #1e293b;
-    --card-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.4);
-}
+/* Dark mode styles removed - site now only uses light mode */
 
 * {
     margin: 0;
@@ -221,44 +211,13 @@ header {
     margin-left: var(--space-md);
 }
 
+/* Theme switch button styles removed as dark mode is disabled */
 #theme-switch {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    transition: background-color 0.3s;
+    display: none; /* Hide the theme switch button */
 }
 
-#theme-switch:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-#theme-switch svg {
-    width: 20px;
-    height: 20px;
-    transition: opacity 0.3s, transform 0.3s;
-}
-
-.sun-icon {
-    display: none;
-}
-
-.moon-icon {
-    display: block;
-}
-
-.dark-mode .sun-icon {
-    display: block;
-}
-
-.dark-mode .moon-icon {
-    display: none;
+.theme-toggle {
+    display: none; /* Hide the theme toggle container */
 }
 
 /* Hero Section */
@@ -1830,12 +1789,7 @@ footer {
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.dark-mode .form-group input,
-.dark-mode .form-group select,
-.dark-mode .form-group textarea {
-    background-color: var(--primary-color-light);
-    border-color: rgba(255, 255, 255, 0.1);
-}
+/* Dark mode form styles removed */
 
 .form-group input:focus,
 .form-group select:focus,

@@ -144,28 +144,10 @@ function initMatchCountdown() {
     }
 }
 
-// Dark Mode Toggle
+// Dark mode has been removed, site now uses light mode only
 function setupDarkMode() {
-    const themeSwitch = document.getElementById('theme-switch');
-    
-    if (themeSwitch) {
-        // Check for saved preference
-        if (localStorage.getItem('darkMode') === 'enabled') {
-            document.body.classList.add('dark-mode');
-        }
-        
-        themeSwitch.addEventListener('click', function() {
-            // Toggle dark mode class
-            document.body.classList.toggle('dark-mode');
-            
-            // Save preference
-            if (document.body.classList.contains('dark-mode')) {
-                localStorage.setItem('darkMode', 'enabled');
-            } else {
-                localStorage.setItem('darkMode', 'disabled');
-            }
-        });
-    }
+    // Function remains for compatibility but does nothing
+    // as dark mode has been completely removed
 }
 
 // Lazy Loading for Images
