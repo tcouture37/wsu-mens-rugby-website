@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Gallery | Winona State Men's Rugby</title>
+    <meta name="description" content="Meet the players of the Winona State University Men's Rugby team">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/coat_of_arms_01.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="main-nav">
+            <div class="logo">
+                <img src="images/coat_of_arms_01.png" alt="WSU Rugby Logo" class="logo-img">
+                <h1>WSU Men's Rugby</h1>
+            </div>
+            <div class="nav-container">
+                <button class="mobile-toggle" aria-label="Toggle navigation menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="gallery.html" class="active">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                    <li><a href="https://www.worldrugbyshop.com/collections/winona-state-university" class="shop-link">Shop</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="gallery-filters">
+        <div class="container">
+            <div class="filter-controls">
+                <h2>Our Players</h2>
+                <div class="filter-sections">
+                    <div class="filter-section">
+                        <h3>Position Type</h3>
+                        <div class="filter-checkboxes">
+                            <label class="filter-checkbox">
+                                <input type="checkbox" data-filter-type="position" data-filter-value="forwards" checked>
+                                <span class="checkmark"></span>
+                                Forwards
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" data-filter-type="position" data-filter-value="backs" checked>
+                                <span class="checkmark"></span>
+                                Backs
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-section">
+                        <h3>Class Year</h3>
+                        <div class="filter-checkboxes multi-column">
+                            <label class="filter-checkbox">
+                                <input type="checkbox" data-filter-type="grade" data-filter-value="freshman" checked>
+                                <span class="checkmark"></span>
+                                Freshmen
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" data-filter-type="grade" data-filter-value="sophomore" checked>
+                                <span class="checkmark"></span>
+                                Sophomores
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" data-filter-type="grade" data-filter-value="junior" checked>
+                                <span class="checkmark"></span>
+                                Juniors
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" data-filter-type="grade" data-filter-value="senior" checked>
+                                <span class="checkmark"></span>
+                                Seniors
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" data-filter-type="grade" data-filter-value="super-senior" checked>
+                                <span class="checkmark"></span>
+                                Super Seniors
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-section">
+                        <h3>Major</h3>
+                        <div class="filter-checkboxes multi-column" id="major-filters">
+                            <!-- Major checkboxes will be dynamically generated -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="filter-actions">
+                    <button class="clear-filters-btn" id="clear-filters">Clear All Filters</button>
+                    <button class="select-all-btn" id="select-all">Select All</button>
+                    <span class="results-count" id="results-count">Showing all players</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="player-gallery">
+        <div class="container">
+            <div class="gallery-grid" id="player-grid">
+                <!-- Player cards will be dynamically inserted here -->
+            </div>
+            
+            <div class="loading-message" id="loading-message">
+                <p>Loading player profiles...</p>
+            </div>
+            
+            <div class="no-players-message" id="no-players-message" style="display: none;">
+                <p>No players found for the selected filter.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="join-team-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Want to Join the Team?</h2>
+                <p>Ready to become part of the brotherhood? We're always looking for dedicated players to join our squad.</p>
+                <a href="contact.html" class="cta-button primary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>Winona State Men's Rugby</h3>
+                <p>Established in 1989, the Winona State Men's Rugby Club has been a powerhouse in collegiate rugby.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=100057694658153" class="social-icon" aria-label="Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/p/DJA-CV7ssxN/" class="social-icon" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="https://www.worldrugbyshop.com/collections/winona-state-university">Shop</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact">
+                <h3>Contact Us</h3>
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <span>info@teamrugby.com</span>
+                </p>
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                    <span>(123) 456-7890</span>
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Winona State Men's Rugby. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/gallery.js"></script>
+</body>
+</html>
