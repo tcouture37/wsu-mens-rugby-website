@@ -37,87 +37,105 @@
         </nav>
     </header>
 
-    <section class="gallery-filters">
-        <div class="container">
-            <div class="filter-controls">
-                <h2>Our Players</h2>
-                <div class="filter-sections">
-                    <div class="filter-section">
-                        <h3>Position Type</h3>
-                        <div class="filter-checkboxes">
-                            <label class="filter-checkbox">
-                                <input type="checkbox" data-filter-type="position" data-filter-value="forwards" checked>
-                                <span class="checkmark"></span>
-                                Forwards
-                            </label>
-                            <label class="filter-checkbox">
-                                <input type="checkbox" data-filter-type="position" data-filter-value="backs" checked>
-                                <span class="checkmark"></span>
-                                Backs
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="filter-section">
-                        <h3>Class Year</h3>
-                        <div class="filter-checkboxes multi-column">
-                            <label class="filter-checkbox">
-                                <input type="checkbox" data-filter-type="grade" data-filter-value="freshman" checked>
-                                <span class="checkmark"></span>
-                                Freshmen
-                            </label>
-                            <label class="filter-checkbox">
-                                <input type="checkbox" data-filter-type="grade" data-filter-value="sophomore" checked>
-                                <span class="checkmark"></span>
-                                Sophomores
-                            </label>
-                            <label class="filter-checkbox">
-                                <input type="checkbox" data-filter-type="grade" data-filter-value="junior" checked>
-                                <span class="checkmark"></span>
-                                Juniors
-                            </label>
-                            <label class="filter-checkbox">
-                                <input type="checkbox" data-filter-type="grade" data-filter-value="senior" checked>
-                                <span class="checkmark"></span>
-                                Seniors
-                            </label>
-                            <label class="filter-checkbox">
-                                <input type="checkbox" data-filter-type="grade" data-filter-value="super-senior" checked>
-                                <span class="checkmark"></span>
-                                Super Seniors
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="filter-section">
-                        <h3>Major</h3>
-                        <div class="filter-checkboxes multi-column" id="major-filters">
-                            <!-- Major checkboxes will be dynamically generated -->
+    <section class="gallery-header">
+        <h1>Our Players</h1>
+    </section>
+
+    <div class="filter-bar">
+        <div class="filter-controls">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label>Position:</label>
+                    <div class="filter-dropdown" id="position-dropdown">
+                        <button class="filter-dropdown-btn">
+                            <span>All Positions</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="filter-dropdown-content">
+                            <div class="filter-option">
+                                <input type="checkbox" id="forwards" data-filter-type="position" data-filter-value="forwards" checked>
+                                <label for="forwards">Forwards</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="backs" data-filter-type="position" data-filter-value="backs" checked>
+                                <label for="backs">Backs</label>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
+
+                <div class="filter-group">
+                    <label>Class:</label>
+                    <div class="filter-dropdown" id="grade-dropdown">
+                        <button class="filter-dropdown-btn">
+                            <span>All Classes</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="filter-dropdown-content">
+                            <div class="filter-option">
+                                <input type="checkbox" id="freshman" data-filter-type="grade" data-filter-value="freshman" checked>
+                                <label for="freshman">Freshmen</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="sophomore" data-filter-type="grade" data-filter-value="sophomore" checked>
+                                <label for="sophomore">Sophomores</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="junior" data-filter-type="grade" data-filter-value="junior" checked>
+                                <label for="junior">Juniors</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="senior" data-filter-type="grade" data-filter-value="senior" checked>
+                                <label for="senior">Seniors</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="super-senior" data-filter-type="grade" data-filter-value="super-senior" checked>
+                                <label for="super-senior">Super Seniors</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label>Major:</label>
+                    <div class="filter-dropdown" id="major-dropdown">
+                        <button class="filter-dropdown-btn">
+                            <span>All Majors</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="filter-dropdown-content" id="major-options">
+                            <!-- Major options will be dynamically generated -->
+                        </div>
+                    </div>
+                </div>
+
                 <div class="filter-actions">
-                    <button class="clear-filters-btn" id="clear-filters">Clear All Filters</button>
-                    <button class="select-all-btn" id="select-all">Select All</button>
-                    <span class="results-count" id="results-count">Showing all players</span>
+                    <button class="filter-btn" id="clear-filters">Clear All</button>
+                    <button class="filter-btn secondary" id="select-all">Select All</button>
+                    <div class="results-info" id="results-count">Showing all players</div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section class="player-gallery">
+    <section class="player-gallery-section">
         <div class="container">
             <div class="gallery-grid" id="player-grid">
                 <!-- Player cards will be dynamically inserted here -->
             </div>
             
-            <div class="loading-message" id="loading-message">
+            <div class="loading-message" id="loading-message" style="text-align: center; padding: var(--space-xl);">
                 <p>Loading player profiles...</p>
             </div>
             
-            <div class="no-players-message" id="no-players-message" style="display: none;">
-                <p>No players found for the selected filter.</p>
+            <div class="no-players-message" id="no-players-message" style="display: none; text-align: center; padding: var(--space-xl);">
+                <p>No players found for the selected filters.</p>
             </div>
         </div>
     </section>
