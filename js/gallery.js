@@ -3,10 +3,9 @@
 
 // Configuration
 const S3_BUCKET_URL = 'https://wsu-mens-rugby-website.s3.us-east-1.amazonaws.com/images/players/';
-const DEFAULT_PLAYER_IMAGE = 'default-player.jpg'; // Fallback image
+const DEFAULT_PLAYER_IMAGE = 'images/players/default-player.jpeg';
 
-// Player data structure
-// Images should be stored in S3 with naming convention: firstname-lastname.jpg
+// Player data
 const playersData = [
     {
         id: 'abe-lincoln',
@@ -93,77 +92,79 @@ const playersData = [
     }
 ];
 
-// Position categories for filtering
+// Position categories
 const positionCategories = {
     forwards: ['Prop', 'Hooker', 'Lock', 'Flanker', 'Number 8'],
     backs: ['Scrum-half', 'Fly-half', 'Inside Centre', 'Outside Centre', 'Wing', 'Fullback']
 };
 
-// Track current filter state
+// Current filter state
 let currentFilters = {
     position: ['forwards', 'backs'],
     grade: ['freshman', 'sophomore', 'junior', 'senior', 'super-senior'],
     major: []
 };
 
-// Initialize gallery when DOM loads
+// Initialize gallery
 document.addEventListener('DOMContentLoaded', function() {
-    if (window.location.pathname.includes('gallery.html') || 
-        window.location.pathname.endsWith('gallery')) {
-        initializeGallery();
-    }
+    initializeGallery();
 });
 
 function initializeGallery() {
-    console.log('Initializing player gallery...');
-    
-    // Setup filter functionality
-    setupFilters();
-    
-    // Load and display players
-    loadPlayers();
-}
-
-function initializeGallery() {
-    console.log('Initializing player gallery...');
-    
-    // Generate major filters from player data
     generateMajorFilters();
-    
-    // Setup filter functionality
+    setupDropdowns();
     setupFilters();
-    
-    // Load and display players
     loadPlayers();
 }
 
 function generateMajorFilters() {
-    // Extract all unique majors from player data
     const allMajors = new Set();
-    
     playersData.forEach(player => {
-        player.major.forEach(major => {
-            allMajors.add(major);
-        });
+        player.major.forEach(major => allMajors.add(major));
     });
     
-    // Sort majors alphabetically
     const sortedMajors = Array.from(allMajors).sort();
-    
-    // Initialize all majors as selected
     currentFilters.major = sortedMajors;
     
-    // Generate HTML for major checkboxes
-    const majorFiltersContainer = document.getElementById('major-filters');
-    if (!majorFiltersContainer) return;
-    
-    majorFiltersContainer.innerHTML = sortedMajors.map(major => `
-        <label class="filter-checkbox">
-            <input type="checkbox" data-filter-type="major" data-filter-value="${major}" checked>
-            <span class="checkmark"></span>
-            ${major}
-        </label>
+    const majorOptions = document.getElementById('major-options');
+    majorOptions.innerHTML = sortedMajors.map(major => `
+        <div class="filter-option">
+            <input type="checkbox" id="major-${major.replace(/\s+/g, '-')}" data-filter-type="major" data-filter-value="${major}" checked>
+            <label for="major-${major.replace(/\s+/g, '-')}">${major}</label>
+        </div>
     `).join('');
+}
+
+function setupDropdowns() {
+    const dropdowns = document.querySelectorAll('.filter-dropdown');
+    
+    dropdowns.forEach(dropdown => {
+        const btn = dropdown.querySelector('.filter-dropdown-btn');
+        const content = dropdown.querySelector('.filter-dropdown-content');
+        
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            
+            // Close other dropdowns
+            dropdowns.forEach(d => {
+                if (d !== dropdown) d.classList.remove('active');
+            });
+            
+            dropdown.classList.toggle('active');
+        });
+        
+        // Prevent dropdown from closing when clicking inside
+        content.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', () => {
+        dropdowns.forEach(dropdown => {
+            dropdown.classList.remove('active');
+        });
+    });
 }
 
 function setupFilters() {
@@ -171,17 +172,14 @@ function setupFilters() {
     const clearFiltersBtn = document.getElementById('clear-filters');
     const selectAllBtn = document.getElementById('select-all');
     
-    // Add event listeners to all filter checkboxes
     filterCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', handleFilterChange);
     });
     
-    // Clear filters button
     if (clearFiltersBtn) {
         clearFiltersBtn.addEventListener('click', clearAllFilters);
     }
     
-    // Select all button
     if (selectAllBtn) {
         selectAllBtn.addEventListener('click', selectAllFilters);
     }
@@ -193,29 +191,69 @@ function handleFilterChange(event) {
     const isChecked = event.target.checked;
     
     if (isChecked) {
-        // Add to current filters
         if (!currentFilters[filterType].includes(filterValue)) {
             currentFilters[filterType].push(filterValue);
         }
     } else {
-        // Remove from current filters
         currentFilters[filterType] = currentFilters[filterType].filter(value => value !== filterValue);
     }
     
-    // Apply filters
+    updateDropdownLabels();
     applyFilters();
+}
+
+function updateDropdownLabels() {
+    // Update position dropdown
+    const positionBtn = document.querySelector('#position-dropdown .filter-dropdown-btn span');
+    const positionCount = currentFilters.position.length;
+    if (positionCount === 0) {
+        positionBtn.textContent = 'No Positions';
+    } else if (positionCount === 2) {
+        positionBtn.textContent = 'All Positions';
+    } else {
+        positionBtn.textContent = currentFilters.position[0].charAt(0).toUpperCase() + currentFilters.position[0].slice(1);
+    }
+
+    // Update grade dropdown
+    const gradeBtn = document.querySelector('#grade-dropdown .filter-dropdown-btn span');
+    const gradeCount = currentFilters.grade.length;
+    if (gradeCount === 0) {
+        gradeBtn.textContent = 'No Classes';
+    } else if (gradeCount === 5) {
+        gradeBtn.textContent = 'All Classes';
+    } else if (gradeCount === 1) {
+        const gradeMap = {
+            'freshman': 'Freshmen',
+            'sophomore': 'Sophomores',
+            'junior': 'Juniors',
+            'senior': 'Seniors',
+            'super-senior': 'Super Seniors'
+        };
+        gradeBtn.textContent = gradeMap[currentFilters.grade[0]];
+    } else {
+        gradeBtn.textContent = `${gradeCount} Classes`;
+    }
+
+    // Update major dropdown
+    const majorBtn = document.querySelector('#major-dropdown .filter-dropdown-btn span');
+    const majorCount = currentFilters.major.length;
+    const totalMajors = new Set(playersData.flatMap(p => p.major)).size;
+    if (majorCount === 0) {
+        majorBtn.textContent = 'No Majors';
+    } else if (majorCount === totalMajors) {
+        majorBtn.textContent = 'All Majors';
+    } else if (majorCount === 1) {
+        majorBtn.textContent = currentFilters.major[0];
+    } else {
+        majorBtn.textContent = `${majorCount} Majors`;
+    }
 }
 
 function applyFilters() {
     const filteredPlayers = playersData.filter(player => {
-        // Check position filter
         const playerPositionType = getPlayerPositionType(player);
         const positionMatch = currentFilters.position.includes(playerPositionType);
-        
-        // Check grade filter
         const gradeMatch = currentFilters.grade.includes(player.gradeLevel);
-        
-        // Check major filter - player must have at least one matching major
         const majorMatch = player.major.some(major => currentFilters.major.includes(major));
         
         return positionMatch && gradeMatch && majorMatch;
@@ -226,47 +264,32 @@ function applyFilters() {
 }
 
 function getPlayerPositionType(player) {
-    // Determine if player is primarily a forward or back
     const forwardPositions = player.positions.filter(pos => positionCategories.forwards.includes(pos));
-    const backPositions = player.positions.filter(pos => positionCategories.backs.includes(pos));
-    
-    // If player has both forward and back positions, prioritize forward
-    if (forwardPositions.length > 0) {
-        return 'forwards';
-    } else if (backPositions.length > 0) {
-        return 'backs';
-    }
-    
-    // Default to forwards if position not found in categories
-    return 'forwards';
+    return forwardPositions.length > 0 ? 'forwards' : 'backs';
 }
 
 function clearAllFilters() {
-    // Uncheck all checkboxes
     const checkboxes = document.querySelectorAll('input[type="checkbox"][data-filter-type]');
     checkboxes.forEach(checkbox => {
         checkbox.checked = false;
     });
     
-    // Clear current filters
     currentFilters = {
         position: [],
         grade: [],
         major: []
     };
     
-    // Apply filters (will show no results)
+    updateDropdownLabels();
     applyFilters();
 }
 
 function selectAllFilters() {
-    // Check all checkboxes
     const checkboxes = document.querySelectorAll('input[type="checkbox"][data-filter-type]');
     checkboxes.forEach(checkbox => {
         checkbox.checked = true;
     });
     
-    // Reset current filters to include everything
     const allMajors = Array.from(new Set(playersData.flatMap(player => player.major))).sort();
     
     currentFilters = {
@@ -275,7 +298,7 @@ function selectAllFilters() {
         major: allMajors
     };
     
-    // Apply filters (will show all results)
+    updateDropdownLabels();
     applyFilters();
 }
 
@@ -286,9 +309,9 @@ function updateResultsCount(count) {
     if (count === playersData.length) {
         resultsCountElement.textContent = 'Showing all players';
     } else if (count === 0) {
-        resultsCountElement.textContent = 'No players match the selected filters';
+        resultsCountElement.textContent = 'No players found';
     } else {
-        resultsCountElement.textContent = `Showing ${count} of ${playersData.length} players`;
+        resultsCountElement.textContent = `Showing ${count} of ${playersData.length}`;
     }
 }
 
@@ -301,12 +324,10 @@ function loadPlayers() {
         return;
     }
     
-    // Show loading state
     loadingMessage.style.display = 'block';
     
-    // Simulate loading delay (in real implementation, this might be an API call)
     setTimeout(() => {
-        applyFilters(); // Use the new filter system instead of displayPlayers
+        applyFilters();
         loadingMessage.style.display = 'none';
     }, 500);
 }
@@ -323,12 +344,8 @@ function displayPlayers(players) {
     
     noPlayersMessage.style.display = 'none';
     
-    // Generate HTML for each player
     const playersHTML = players.map((player, index) => createPlayerCard(player, index)).join('');
     playerGrid.innerHTML = playersHTML;
-    
-    // Add event listeners for social media links
-    setupSocialMediaLinks();
     
     // Add staggered animation
     const playerCards = playerGrid.querySelectorAll('.player-card');
@@ -362,10 +379,10 @@ function createPlayerCard(player, index) {
     return `
         <div class="player-card" data-positions="${player.positions.join(',').toLowerCase()}" data-grade="${player.gradeLevel}">
             <div class="player-image">
-                <img src="${imageUrl}" alt="${displayName}" loading="lazy" onerror="this.src='${DEFAULT_PLAYER_IMAGE}'">
+                <img src="${imageUrl}" alt="${displayName}" loading="lazy" onerror="this.onerror=null; this.src='${DEFAULT_PLAYER_IMAGE}';">
                 <div class="player-overlay">
                     <div class="player-bio">
-                        <p>${player.bio}</p>
+                        <p>${player.bio || 'No bio available'}</p>
                     </div>
                 </div>
             </div>
@@ -442,33 +459,10 @@ function createSocialMediaLinks(socialMedia) {
     return linksHTML;
 }
 
-function setupSocialMediaLinks() {
-    const socialLinks = document.querySelectorAll('.social-link');
-    
-    socialLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Add click animation
-            this.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                this.style.transform = '';
-            }, 150);
-        });
-    });
-}
-
 function getPlayerImageUrl(imageFileName) {
     if (!imageFileName) {
         return DEFAULT_PLAYER_IMAGE;
     }
     
     return S3_BUCKET_URL + imageFileName;
-}
-
-// Export for potential use in other scripts
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        playersData,
-        initializeGallery,
-        applyFilters
-    };
 }
