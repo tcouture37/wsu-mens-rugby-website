@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Match Results | Winona State Men's Rugby</title>
-    <meta name="description" content="View past match results and game history for the Winona State University Men's Rugby team">
+    <title>Newsletter - Winona State Men's Rugby</title>
+    <meta name="description" content="Subscribe to the WSU Rugby newsletter for the latest team updates, match results, and exclusive content">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="images/coat_of_arms_01.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,9 +28,9 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="team.html">Team</a></li>
                     <li><a href="coaches.html">Coaches</a></li>
-                    <li><a href="results.html" class="active">Results</a></li>
-                    <li><a href="https://www.instagram.com/p/DJA-CV7ssxN/">Gallery</a></li>
-                    <li><a href="newsletter.html">Newsletter</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="newsletter.html" class="active">Newsletter</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="donate.html">Donate</a></li>
                     <li><a href="https://www.worldrugbyshop.com/collections/winona-state-university" class="shop-link">Shop</a></li>
@@ -42,96 +42,38 @@
     <section class="page-hero">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h2>Match Results</h2>
-            <p>Our History on the Pitch</p>
+            <h2>Newsletter</h2>
+            <p>Stay informed about WSU Rugby</p>
         </div>
     </section>
 
-    <section class="results-filter">
+    <section class="newsletter-simple">
         <div class="container">
-            <div class="filter-controls">
-                <h2>Season Results</h2>
-                <div class="filter-buttons">
-                    <!-- Filter buttons will be dynamically generated -->
+            <div class="newsletter-card">
+                <h2>Stay Up-to-Date</h2>
+                <p>The best way to stay informed about WSU Rugby. We'll send a few emails each semester with important updates.</p>
+                
+                <!-- Mailchimp Signup Form -->
+                <div id="mc_embed_signup">
+                    <form action="https://YOUR_MAILCHIMP_URL_HERE" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate simple-form" target="_blank" novalidate>
+                        <div id="mc_embed_signup_scroll">
+                            <div class="form-group">
+                                <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Enter your email address" required>
+                            </div>
+                            
+                            <!-- real people should not fill this in and expect good things -->
+                            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                                <input type="text" name="b_YOUR_BOT_PROTECTION_ID_HERE" tabindex="-1" value="">
+                            </div>
+                            
+                            <div class="clear">
+                                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="submit-button">
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="results-section">
-        <div class="container">
-            <div class="loading-message">
-                <p>Loading match results...</p>
-            </div>
-        </div>
-    </section>
-    
-    <section class="championships-section">
-        <div class="container">
-            <h2>Championship Seasons</h2>
-            <div class="championships-grid">
-                <div class="championship-card">
-                    <div class="championship-year">2022</div>
-                    <h3>Minnesota Collegiate Rugby Conference Champions</h3>
-                    <p>Defeated St. John's University 27-24 in the final match to secure the title with an overall season record of 9-1-0.</p>
-                </div>
-                <div class="championship-card">
-                    <div class="championship-year">2018</div>
-                    <h3>Minnesota Collegiate Rugby Conference Champions</h3>
-                    <p>Dominated the conference with a 9-1-0 record, culminating in a 35-17 victory over Minnesota State in the championship match.</p>
-                </div>
-                <div class="championship-card">
-                    <div class="championship-year">2017</div>
-                    <h3>Minnesota Collegiate Rugby Conference Champions</h3>
-                    <p>Back-to-back championships with an 8-2-0 record, defeating UW La Crosse 29-22 in the final.</p>
-                </div>
-                <div class="championship-card">
-                    <div class="championship-year">2016</div>
-                    <h3>Minnesota Collegiate Rugby Conference Champions</h3>
-                    <p>Perfect 10-0-0 season culminating in a 32-15 championship win over St. Cloud State.</p>
-                </div>
-                <div class="championship-card">
-                    <div class="championship-year">2014</div>
-                    <h3>Northern Lights Tournament Champions</h3>
-                    <p>Defeated 6 teams over a weekend tournament to claim the prestigious Northern Lights title.</p>
-                </div>
-                <div class="championship-card">
-                    <div class="championship-year">2013</div>
-                    <h3>Minnesota Collegiate Rugby Conference Champions</h3>
-                    <p>8-2-0 record with a dominant 41-10 victory in the championship game.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="all-time-records">
-        <div class="container">
-            <h2>All-Time Records</h2>
-            <div class="records-grid">
-                <div class="record-item">
-                    <div class="record-number">267</div>
-                    <div class="record-label">All-Time Wins</div>
-                </div>
-                <div class="record-item">
-                    <div class="record-number">78%</div>
-                    <div class="record-label">Win Percentage</div>
-                </div>
-                <div class="record-item">
-                    <div class="record-number">12</div>
-                    <div class="record-label">Conference Championships</div>
-                </div>
-                <div class="record-item">
-                    <div class="record-number">5</div>
-                    <div class="record-label">Tournament Victories</div>
-                </div>
-                <div class="record-item">
-                    <div class="record-number">10-0</div>
-                    <div class="record-label">Best Season (2016)</div>
-                </div>
-                <div class="record-item">
-                    <div class="record-number">67</div>
-                    <div class="record-label">Most Points in a Game</div>
-                </div>
+                
+                <p class="unsubscribe-note">You can unsubscribe at any time using the link in our emails.</p>
             </div>
         </div>
     </section>
@@ -162,7 +104,7 @@
                     <li><a href="team.html">Team</a></li>
                     <li><a href="coaches.html">Coaches</a></li>
                     <li><a href="results.html">Results</a></li>
-                    <li><a href="https://www.instagram.com/p/DJA-CV7ssxN/">Gallery</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
                     <li><a href="newsletter.html">Newsletter</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="https://www.worldrugbyshop.com/collections/winona-state-university">Shop</a></li>

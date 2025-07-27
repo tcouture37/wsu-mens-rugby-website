@@ -223,13 +223,15 @@ header {
 /* Hero Section */
 .hero {
     position: relative;
-    background-image: url('../images/banner_logo_01.jpg');
-    background-size: cover;
-    background-position: center;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color-light) 50%, var(--accent-color-dark) 100%);
     color: white;
     text-align: center;
     padding: var(--space-2xl) var(--space-md);
     overflow: hidden;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero-overlay {
@@ -238,7 +240,7 @@ header {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.6));
+    background: rgba(0, 0, 0, 0.3);
     z-index: 1;
 }
 
@@ -254,12 +256,16 @@ header {
     margin-bottom: var(--space-md);
     line-height: 1.1;
     font-weight: 900;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .hero p {
     font-size: var(--font-size-lg);
     margin-bottom: var(--space-lg);
     font-weight: 300;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .hero-buttons {
@@ -325,6 +331,12 @@ section h2::after {
     transform: translateX(-50%);
     background-color: var(--accent-color);
     border-radius: var(--radius-full);
+}
+
+/* Remove yellow bar from hero sections */
+.hero h2::after,
+.page-hero h2::after {
+    display: none;
 }
 
 /* News Section */
@@ -621,6 +633,216 @@ section h2::after {
     opacity: 1;
 }
 
+/* Page hero for secondary pages */
+.page-hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color-light) 70%, var(--accent-color-dark) 100%);
+    color: white;
+    text-align: center;
+    padding: var(--space-2xl) var(--space-md);
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-hero .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.page-hero .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.page-hero h2 {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--space-sm);
+    font-weight: 900;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.page-hero p {
+    font-size: var(--font-size-md);
+    font-weight: 300;
+    margin-bottom: 0;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* Coaches page styles */
+.coaches-section {
+    padding: var(--space-2xl) 5%;
+    background-color: var(--bg-color);
+}
+
+.coaches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--space-xl);
+    margin-top: var(--space-xl);
+}
+
+.coach-card {
+    background-color: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.coach-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.coach-image {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.coach-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.coach-card:hover .coach-image img {
+    transform: scale(1.05);
+}
+
+.coach-info {
+    padding: var(--space-lg);
+}
+
+.coach-info h3 {
+    font-size: var(--font-size-lg);
+    color: var(--primary-color);
+    margin-bottom: var(--space-md);
+    text-align: center;
+}
+
+.coach-details {
+    margin-bottom: var(--space-lg);
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--bg-color-secondary);
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-item .label {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: var(--font-size-sm);
+}
+
+.detail-item .value {
+    color: var(--accent-color-dark);
+    font-weight: 500;
+    font-size: var(--font-size-sm);
+}
+
+.coach-description {
+    color: var(--text-light);
+    line-height: 1.7;
+    font-size: var(--font-size-sm);
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .coaches-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+    
+    .coach-image {
+        height: 200px;
+    }
+    
+    .detail-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-xs);
+    }
+}
+
+/* Newsletter page styles */
+.newsletter-simple {
+    padding: var(--space-2xl) 5%;
+    background-color: var(--bg-color);
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
+.newsletter-card {
+    background-color: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--card-shadow);
+    padding: var(--space-2xl);
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.newsletter-card h2 {
+    color: var(--primary-color);
+    margin-bottom: var(--space-md);
+}
+
+.newsletter-card > p {
+    color: var(--text-light);
+    margin-bottom: var(--space-xl);
+    line-height: 1.6;
+}
+
+.simple-form .form-group {
+    margin-bottom: var(--space-lg);
+}
+
+.simple-form input[type="email"] {
+    width: 100%;
+    padding: var(--space-lg);
+    border: 2px solid var(--bg-color-secondary);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    transition: border-color 0.3s ease;
+    text-align: center;
+}
+
+.simple-form input[type="email"]:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+}
+
+.unsubscribe-note {
+    margin-top: var(--space-lg);
+    color: var(--text-light);
+    font-size: var(--font-size-sm);
+    margin-bottom: 0;
+}
+
 /* Footer */
 footer {
     background-color: var(--primary-color);
@@ -664,6 +886,17 @@ footer {
 
 .footer-section li {
     margin-bottom: var(--space-sm);
+}
+
+/* Fix quick links to display horizontally */
+.footer-section.links ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm) var(--space-md);
+}
+
+.footer-section.links li {
+    margin-bottom: 0;
 }
 
 .footer-section a {
@@ -730,8 +963,7 @@ footer {
 
 /* Team Page Styles */
 .team-hero {
-    background-image: url('../images/2024_35th_alumni_01.jpg');
-    background-position: center 30%;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color-light) 70%, var(--accent-color-dark) 100%);
     min-height: 400px;
     display: flex;
     align-items: center;
@@ -1218,20 +1450,44 @@ footer {
     border-bottom: none;
 }
 
-.results-table tr.win td {
+.results-table tr.win td,
+.results-table tr.green td {
     border-left: 3px solid #10b981; /* Green */
 }
 
-.results-table tr.loss td {
+.results-table tr.loss td,
+.results-table tr.red td {
     border-left: 3px solid #ef4444; /* Red */
 }
 
-.results-table tr.draw td {
-    border-left: 3px solid #f59e0b; /* Amber */
+.results-table tr.draw td,
+.results-table tr.orange td {
+    border-left: 3px solid #f59e0b; /* Orange */
 }
 
 .results-table tr:hover {
     background-color: var(--bg-color-secondary);
+}
+
+.loading-message {
+    text-align: center;
+    padding: var(--space-xl);
+    color: var(--text-light);
+}
+
+.error-message {
+    text-align: center;
+    padding: var(--space-xl);
+    color: var(--text-color);
+    background-color: #fee2e2;
+    border: 1px solid #fecaca;
+    border-radius: var(--radius-md);
+    margin: var(--space-lg) 0;
+}
+
+.error-message h3 {
+    color: #dc2626;
+    margin-bottom: var(--space-sm);
 }
 
 .historic-results {
