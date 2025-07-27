@@ -10,6 +10,284 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Override the default animation to make timeline visible immediately */
+        .timeline-item {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            animation: none !important;
+            animation-delay: 0s !important;
+        }
+        
+        /* Override section reveal animation for coaches timeline */
+        .coaches-timeline-section.reveal-section {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        
+        /* Ensure coaches timeline section is always visible */
+        .coaches-timeline-section {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        
+        /* Keep the hover effects and other transitions */
+        .timeline-content {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        @keyframes fadeInSection {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Keep the pulse animation for current coach marker */
+        .timeline-item.current .timeline-marker {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            }
+        }
+        
+        /* Make coach cards clickable */
+        .coach-card {
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .coach-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Gallery styles */
+        .coach-gallery {
+            position: absolute;
+            width: 1200px;
+            height: 1500px;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .coach-gallery.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+        
+        .gallery-header {
+            padding: var(--space-xl);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+        
+        .gallery-header h3 {
+            color: white;
+            margin: 0;
+            font-size: var(--font-size-2xl);
+            font-weight: 600;
+        }
+        
+        .gallery-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 36px;
+            cursor: pointer;
+            padding: var(--space-md);
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gallery-close:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .gallery-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-2xl);
+            position: relative;
+        }
+        
+        .gallery-image {
+            max-width: 90%;
+            max-height: 1000px;
+            object-fit: contain;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 12px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-color);
+            border: none;
+            color: white;
+            font-size: 48px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gallery-nav:hover {
+            background: var(--accent-color);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .gallery-nav.prev {
+            left: var(--space-xl);
+        }
+        
+        .gallery-nav.next {
+            right: var(--space-xl);
+        }
+        
+        .gallery-counter {
+            margin-top: var(--space-xl);
+            color: var(--text-secondary);
+            font-size: var(--font-size-lg);
+            font-weight: 500;
+        }
+        
+        /* Mobile responsive gallery */
+        @media (max-width: 1600px) {
+            .coach-gallery {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(0.8);
+                width: 90%;
+                max-width: 1000px;
+                height: 90vh;
+                max-height: 1200px;
+            }
+            
+            .coach-gallery.active {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            
+            .gallery-image {
+                max-height: 800px;
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .coach-gallery {
+                width: 95%;
+                max-width: 800px;
+                height: 85vh;
+                max-height: 1000px;
+            }
+            
+            .gallery-image {
+                max-height: 600px;
+            }
+            
+            .gallery-nav {
+                font-size: 36px;
+                width: 60px;
+                height: 60px;
+            }
+            
+            .gallery-header h3 {
+                font-size: var(--font-size-xl);
+            }
+            
+            .gallery-close {
+                font-size: 28px;
+                width: 48px;
+                height: 48px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .coach-gallery {
+                width: 95%;
+                height: 80vh;
+                max-height: 800px;
+            }
+            
+            .gallery-image {
+                max-height: 400px;
+            }
+            
+            .gallery-nav {
+                font-size: 24px;
+                width: 40px;
+                height: 40px;
+            }
+            
+            .gallery-header {
+                padding: var(--space-lg);
+            }
+            
+            .gallery-content {
+                padding: var(--space-lg);
+            }
+        }
+        
+        /* Gallery backdrop */
+        .gallery-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-backdrop.active {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -26,10 +304,9 @@
                 </button>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="team.html">Team</a></li>
                     <li><a href="coaches.html" class="active">Coaches</a></li>
                     <li><a href="results.html">Results</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="social.html">Social</a></li>
                     <li><a href="newsletter.html">Newsletter</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="donate.html">Donate</a></li>
@@ -42,191 +319,462 @@
     <section class="page-hero">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h2>Our Coaches</h2>
-            <p>Meet the leaders who have shaped WSU Rugby throughout the years</p>
+            <h2>Coaching Timeline</h2>
+            <p>The leaders who have shaped WSU Rugby throughout the years</p>
         </div>
     </section>
 
-    <section class="coaches-section">
+    <section class="coaches-timeline-section">
         <div class="container">
-            <div class="coaches-grid">
-                <div class="coach-card">
-                    <div class="coach-image">
-                        <img src="images/coaches/john-smith.jpg" alt="Coach Name" loading="lazy">
-                    </div>
-                    <div class="coach-info">
-                        <h3>John Smith</h3>
-                        <div class="coach-details">
-                            <div class="detail-item">
-                                <span class="label">Years Coached:</span>
-                                <span class="value">2018-2023</span>
+            <div class="timeline">
+                
+                <div class="timeline-item current">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="coach-card">
+                            <div class="coach-left">
+                                <div class="timeline-period">Fall 2023 - Current</div>
+                                <div class="coach-photo">
+                                    <img src="images/coaches/mikey.jpg" alt="Rob Thor Thoresen" loading="lazy">
+                                </div>
                             </div>
-                            <div class="detail-item">
-                                <span class="label">Hometown:</span>
-                                <span class="value">Minneapolis, MN</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="label">College:</span>
-                                <span class="value">University of Minnesota</span>
+                            <div class="coach-right">
+                                <div class="coach-info">
+                                    <h3>Rob "Thor" Thoresen</h3>
+                                    <div class="coach-details">
+                                        <div class="detail-item">
+                                            <span class="label">Hometown:</span>
+                                            <span class="value">Lincolnshire, IL</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">College:</span>
+                                            <span class="value">Winona State</span>
+                                        </div>
+                                    </div>
+                                    <p class="coach-description">Current head coach leading the team with experience and dedication. Known for his strategic approach and commitment to developing both individual players and team chemistry. Description to be added.</p>
+                                </div>
                             </div>
                         </div>
-                        <p class="coach-description">Led the team to multiple championship victories and developed innovative training programs that transformed the team's playing style. Known for his dedication to player development both on and off the field.</p>
                     </div>
                 </div>
 
-                <div class="coach-card">
-                    <div class="coach-image">
-                        <img src="images/coaches/mikey.jpg" alt="Coach Name" loading="lazy">
-                    </div>
-                    <div class="coach-info">
-                        <h3>Mike Johnson</h3>
-                        <div class="coach-details">
-                            <div class="detail-item">
-                                <span class="label">Years Coached:</span>
-                                <span class="value">2010-2017</span>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="coach-card">
+                            <div class="coach-left">
+                                <div class="timeline-period">Fall 2021 - Spring 2023</div>
+                                <div class="coach-photo">
+                                    <img src="images/coaches/john-smith.jpg" alt="Parker Buth" loading="lazy">
+                                </div>
                             </div>
-                            <div class="detail-item">
-                                <span class="label">Hometown:</span>
-                                <span class="value">Rochester, MN</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="label">College:</span>
-                                <span class="value">Winona State University</span>
+                            <div class="coach-right">
+                                <div class="coach-info">
+                                    <h3>Parker Buth</h3>
+                                    <div class="coach-details">
+                                        <div class="detail-item">
+                                            <span class="label">Hometown:</span>
+                                            <span class="value">Mukwonago, WI</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">College:</span>
+                                            <span class="value">Winona State</span>
+                                        </div>
+                                    </div>
+                                    <p class="coach-description">Led the team through challenging seasons with commitment and strategic vision. Brought fresh perspectives and modern training techniques to elevate the program. Description to be added.</p>
+                                </div>
                             </div>
                         </div>
-                        <p class="coach-description">A WSU alumni who brought passion and deep understanding of the program's traditions. Focused on building team chemistry and establishing the foundation for future success.</p>
                     </div>
                 </div>
 
-                <div class="coach-card">
-                    <div class="coach-image">
-                        <img src="images/coaches/coach-placeholder.jpg" alt="Coach Name" loading="lazy">
-                    </div>
-                    <div class="coach-info">
-                        <h3>Sarah Williams</h3>
-                        <div class="coach-details">
-                            <div class="detail-item">
-                                <span class="label">Years Coached:</span>
-                                <span class="value">2005-2009, 2024-Present</span>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="coach-card">
+                            <div class="coach-left">
+                                <div class="timeline-period">Fall 2020 - Spring 2021</div>
+                                <div class="coach-photo">
+                                    <img src="images/coaches/mikey.jpg" alt="Sam Favor and Lars Swedberg" loading="lazy">
+                                </div>
                             </div>
-                            <div class="detail-item">
-                                <span class="label">Hometown:</span>
-                                <span class="value">La Crosse, WI</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="label">College:</span>
-                                <span class="value">University of Wisconsin-La Crosse</span>
+                            <div class="coach-right">
+                                <div class="coach-info">
+                                    <h3>Sam Favor and Lars Swedberg</h3>
+                                    <div class="coach-details">
+                                        <div class="detail-item">
+                                            <span class="label">Sam's Hometown:</span>
+                                            <span class="value">Madison, WI</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">Sam's College:</span>
+                                            <span class="value">Winona State</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">Lars' Hometown:</span>
+                                            <span class="value">St. Louis, MO</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">Lars' College:</span>
+                                            <span class="value">Saint John's</span>
+                                        </div>
+                                    </div>
+                                    <p class="coach-description">Co-coached the team during a unique period, bringing complementary skills and leadership styles. Their collaborative approach helped maintain team unity during challenging times. Description to be added.</p>
+                                </div>
                             </div>
                         </div>
-                        <p class="coach-description">Returned to coaching after a successful career in professional rugby. Brings international experience and modern techniques while maintaining the team's core values and fighting spirit.</p>
                     </div>
                 </div>
 
-                <div class="coach-card">
-                    <div class="coach-image">
-                        <img src="images/coaches/coach-placeholder.jpg" alt="Coach Name" loading="lazy">
-                    </div>
-                    <div class="coach-info">
-                        <h3>Dave Thompson</h3>
-                        <div class="coach-details">
-                            <div class="detail-item">
-                                <span class="label">Years Coached:</span>
-                                <span class="value">1995-2004</span>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="coach-card">
+                            <div class="coach-left">
+                                <div class="timeline-period">Fall 2017 - Spring 2019</div>
+                                <div class="coach-photo">
+                                    <img src="images/coaches/john-smith.jpg" alt="John Schwarte and Jake Cena Letsinger" loading="lazy">
+                                </div>
                             </div>
-                            <div class="detail-item">
-                                <span class="label">Hometown:</span>
-                                <span class="value">Winona, MN</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="label">College:</span>
-                                <span class="value">St. Cloud State University</span>
+                            <div class="coach-right">
+                                <div class="coach-info">
+                                    <h3>John Schwarte and Jake "Cena" Letsinger</h3>
+                                    <div class="coach-details">
+                                        <div class="detail-item">
+                                            <span class="label">Hometown:</span>
+                                            <span class="value">To be added</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">College:</span>
+                                            <span class="value">To be added</span>
+                                        </div>
+                                    </div>
+                                    <p class="coach-description">Dynamic coaching duo who brought energy and innovation to the program. Known for their motivational leadership and ability to inspire players to exceed their own expectations. Description to be added.</p>
+                                </div>
                             </div>
                         </div>
-                        <p class="coach-description">One of the longest-serving coaches in program history. Established many of the traditions and training methods that continue today. Known for his tactical expertise and ability to develop young talent.</p>
                     </div>
                 </div>
 
-                <div class="coach-card">
-                    <div class="coach-image">
-                        <img src="images/coaches/coach-placeholder.jpg" alt="Coach Name" loading="lazy">
-                    </div>
-                    <div class="coach-info">
-                        <h3>Tom Anderson</h3>
-                        <div class="coach-details">
-                            <div class="detail-item">
-                                <span class="label">Years Coached:</span>
-                                <span class="value">1989-1994</span>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="coach-card">
+                            <div class="coach-left">
+                                <div class="timeline-period">Fall 2014 - Spring 2017</div>
+                                <div class="coach-photo">
+                                    <img src="images/coaches/mikey.jpg" alt="Jeff Noe" loading="lazy">
+                                </div>
                             </div>
-                            <div class="detail-item">
-                                <span class="label">Hometown:</span>
-                                <span class="value">St. Paul, MN</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="label">College:</span>
-                                <span class="value">Carleton College</span>
+                            <div class="coach-right">
+                                <div class="coach-info">
+                                    <h3>Jeff Noe</h3>
+                                    <div class="coach-details">
+                                        <div class="detail-item">
+                                            <span class="label">Hometown:</span>
+                                            <span class="value">To be added</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">College:</span>
+                                            <span class="value">To be added</span>
+                                        </div>
+                                    </div>
+                                    <p class="coach-description">Provided steady leadership and tactical expertise during his tenure. Focused on building a strong foundation of rugby fundamentals while fostering team camaraderie. Description to be added.</p>
+                                </div>
                             </div>
                         </div>
-                        <p class="coach-description">Founding coach of the WSU Men's Rugby program. Established the team's culture and competitive spirit from day one. His vision and leadership laid the groundwork for decades of success.</p>
                     </div>
                 </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="coach-card">
+                            <div class="coach-left">
+                                <div class="timeline-period">Fall 2012 - Spring 2013</div>
+                                <div class="coach-photo">
+                                    <img src="images/coaches/john-smith.jpg" alt="Rob Thor Thoresen 2012" loading="lazy">
+                                </div>
+                            </div>
+                            <div class="coach-right">
+                                <div class="coach-info">
+                                    <h3>Rob "Thor" Thoresen</h3>
+                                    <div class="coach-details">
+                                        <div class="detail-item">
+                                            <span class="label">Hometown:</span>
+                                            <span class="value">To be added</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">College:</span>
+                                            <span class="value">To be added</span>
+                                        </div>
+                                    </div>
+                                    <p class="coach-description">Previous tenure with the team, bringing valuable experience that would later inform his current coaching role. This earlier period helped him understand the program's traditions and culture. Description to be added.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="coach-card">
+                            <div class="coach-left">
+                                <div class="timeline-period">Fall 2009 - Spring 2012</div>
+                                <div class="coach-photo">
+                                    <img src="images/coaches/mikey.jpg" alt="Nick Porno Pronold and Ethan Wanless" loading="lazy">
+                                </div>
+                            </div>
+                            <div class="coach-right">
+                                <div class="coach-info">
+                                    <h3>Nick "Porno" Pronold and Ethan Wanless</h3>
+                                    <div class="coach-details">
+                                        <div class="detail-item">
+                                            <span class="label">Hometown:</span>
+                                            <span class="value">To be added</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">College:</span>
+                                            <span class="value">To be added</span>
+                                        </div>
+                                    </div>
+                                    <p class="coach-description">Co-coaching team that guided the program through multiple seasons with dedication and skill. Their partnership brought stability and consistent growth to the team during their tenure. Description to be added.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="coach-card">
+                            <div class="coach-left">
+                                <div class="timeline-period">Fall 1995 - Spring 2009</div>
+                                <div class="coach-photo">
+                                    <img src="images/coaches/john-smith.jpg" alt="Josh Krzewinski" loading="lazy">
+                                </div>
+                            </div>
+                            <div class="coach-right">
+                                <div class="coach-info">
+                                    <h3>Josh Krzewinski</h3>
+                                    <div class="coach-details">
+                                        <div class="detail-item">
+                                            <span class="label">Hometown:</span>
+                                            <span class="value">To be added</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">College:</span>
+                                            <span class="value">To be added</span>
+                                        </div>
+                                    </div>
+                                    <p class="coach-description">Long-serving coach who established many of the traditions and competitive standards that define the program today. His 14-year tenure was marked by consistent excellence and the development of countless players. Description to be added.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item founding">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="coach-card">
+                            <div class="coach-left">
+                                <div class="timeline-period">Fall 1989 - Spring 1995</div>
+                                <div class="coach-photo">
+                                    <img src="images/coaches/mikey.jpg" alt="Lasantha Dahanaike" loading="lazy">
+                                </div>
+                            </div>
+                            <div class="coach-right">
+                                <div class="coach-info">
+                                    <h3>Lasantha Dahanaike</h3>
+                                    <div class="coach-details">
+                                        <div class="detail-item">
+                                            <span class="label">Hometown:</span>
+                                            <span class="value">To be added</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">College:</span>
+                                            <span class="value">To be added</span>
+                                        </div>
+                                    </div>
+                                    <p class="coach-description">Founding coach of WSU Men's Rugby. Established the program's foundation and culture that continues to this day. His vision and leadership created the blueprint for what would become a legendary program. Description to be added.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section about">
-                <h3>Winona State Men's Rugby</h3>
-                <p>Established in 1989, the Winona State Men's Rugby Club has been a powerhouse in collegiate rugby.</p>
-                <div class="social-links">
-                    <a href="https://www.facebook.com/profile.php?id=100057694658153" class="social-icon" aria-label="Facebook">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                        </svg>
-                    </a>
-                    <a href="https://www.instagram.com/p/DJA-CV7ssxN/" class="social-icon" aria-label="Instagram">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <div class="footer-section links">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="team.html">Team</a></li>
-                    <li><a href="coaches.html">Coaches</a></li>
-                    <li><a href="results.html">Results</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="newsletter.html">Newsletter</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="https://www.worldrugbyshop.com/collections/winona-state-university">Shop</a></li>
-                </ul>
-            </div>
-            <div class="footer-section contact">
-                <h3>Contact Us</h3>
-                <p>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-                    <span>info@teamrugby.com</span>
-                </p>
-                <p>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                    </svg>
-                    <span>(123) 456-7890</span>
-                </p>
-            </div>
+    <!-- Gallery Backdrop -->
+    <div class="gallery-backdrop" id="galleryBackdrop"></div>
+    
+    <!-- Coach Gallery -->
+    <div class="coach-gallery" id="coachGallery">
+        <div class="gallery-header">
+            <h3 id="galleryTitle">Coach Gallery</h3>
+            <button class="gallery-close" id="galleryClose">&times;</button>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Winona State Men's Rugby. All rights reserved.</p>
+        <div class="gallery-content">
+            <button class="gallery-nav prev" id="galleryPrev">&#8249;</button>
+            <img class="gallery-image" id="galleryImage" src="" alt="Coach Photo">
+            <button class="gallery-nav next" id="galleryNext">&#8250;</button>
+            <div class="gallery-counter" id="galleryCounter">1 / 4</div>
         </div>
-    </footer>
+    </div>
 
     <script src="js/main.js"></script>
+    <script>
+        // Coach gallery functionality
+        class CoachGallery {
+            constructor() {
+                this.gallery = document.getElementById('coachGallery');
+                this.backdrop = document.getElementById('galleryBackdrop');
+                this.galleryTitle = document.getElementById('galleryTitle');
+                this.galleryImage = document.getElementById('galleryImage');
+                this.galleryCounter = document.getElementById('galleryCounter');
+                this.closeBtn = document.getElementById('galleryClose');
+                this.prevBtn = document.getElementById('galleryPrev');
+                this.nextBtn = document.getElementById('galleryNext');
+                
+                this.currentImages = [];
+                this.currentIndex = 0;
+                this.currentCoach = '';
+                
+                // Placeholder images from players directory
+                this.placeholderImages = [
+                    'images/players/default-player.jpeg',
+                    'images/players/gdub.webp',
+                    'images/players/lincolnator.jpg',
+                    'images/players/tdawg.jpg'
+                ];
+                
+                this.init();
+            }
+            
+            init() {
+                // Add click handlers to all coach cards
+                const coachCards = document.querySelectorAll('.coach-card');
+                coachCards.forEach((card, index) => {
+                    card.addEventListener('click', () => {
+                        const timelineItem = card.closest('.timeline-item');
+                        const coachName = card.querySelector('h3').textContent;
+                        const isEvenItem = (index + 1) % 2 === 0;
+                        this.openGallery(coachName, isEvenItem, card);
+                    });
+                });
+                
+                // Gallery navigation
+                this.closeBtn.addEventListener('click', () => this.closeGallery());
+                this.prevBtn.addEventListener('click', () => this.prevImage());
+                this.nextBtn.addEventListener('click', () => this.nextImage());
+                
+                // Close on escape key
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.gallery.classList.contains('active')) {
+                        this.closeGallery();
+                    }
+                });
+                
+                // Close on backdrop click
+                this.backdrop.addEventListener('click', () => {
+                    this.closeGallery();
+                });
+            }
+            
+            openGallery(coachName, isEvenItem, clickedCard) {
+                this.currentCoach = coachName;
+                this.currentImages = [...this.placeholderImages];
+                this.currentIndex = 0;
+                
+                // Set gallery title
+                this.galleryTitle.textContent = `${coachName} Gallery`;
+                
+                // Position gallery next to the clicked card
+                this.positionGallery(clickedCard, isEvenItem);
+                
+                // Show gallery and backdrop
+                this.backdrop.classList.add('active');
+                this.gallery.classList.add('active');
+                this.updateImage();
+            }
+            
+            positionGallery(clickedCard, isEvenItem) {
+                const cardRect = clickedCard.getBoundingClientRect();
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+                
+                // Get viewport dimensions
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+                
+                // Gallery dimensions
+                const galleryWidth = 1200;
+                const galleryHeight = 1500;
+                const margin = 40;
+                
+                let left, top;
+                
+                // Position on desktop/tablet
+                if (viewportWidth > 1600) {
+                    if (isEvenItem) {
+                        // Even items are on the right side, place gallery to the left
+                        left = Math.max(margin, cardRect.left - galleryWidth - margin + scrollLeft);
+                    } else {
+                        // Odd items are on the left side, place gallery to the right
+                        left = Math.min(viewportWidth - galleryWidth - margin, cardRect.right + margin + scrollLeft);
+                    }
+                    
+                    // Vertically align with the card, but ensure it stays within viewport
+                    top = Math.max(margin, Math.min(
+                        cardRect.top + scrollTop - 200, // Offset to better align with card
+                        scrollTop + viewportHeight - galleryHeight - margin
+                    ));
+                } else {
+                    // On smaller screens, center the gallery
+                    left = (viewportWidth - Math.min(galleryWidth, viewportWidth * 0.9)) / 2 + scrollLeft;
+                    top = (viewportHeight - Math.min(galleryHeight, viewportHeight * 0.9)) / 2 + scrollTop;
+                }
+                
+                // Apply positioning
+                this.gallery.style.left = `${left}px`;
+                this.gallery.style.top = `${top}px`;
+            }
+            
+            closeGallery() {
+                this.backdrop.classList.remove('active');
+                this.gallery.classList.remove('active');
+            }
+            
+            updateImage() {
+                if (this.currentImages.length === 0) return;
+                
+                this.galleryImage.src = this.currentImages[this.currentIndex];
+                this.galleryImage.alt = `${this.currentCoach} - Photo ${this.currentIndex + 1}`;
+                this.galleryCounter.textContent = `${this.currentIndex + 1} / ${this.currentImages.length}`;
+            }
+            
+            nextImage() {
+                if (this.currentImages.length === 0) return;
+                this.currentIndex = (this.currentIndex + 1) % this.currentImages.length;
+                this.updateImage();
+            }
+            
+            prevImage() {
+                if (this.currentImages.length === 0) return;
+                this.currentIndex = (this.currentIndex - 1 + this.currentImages.length) % this.currentImages.length;
+                this.updateImage();
+            }
+        }
+        
+        // Initialize gallery when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new CoachGallery();
+        });
+    </script>
 </body>
 </html>

@@ -680,111 +680,6 @@ section h2::after {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
-/* Coaches page styles */
-.coaches-section {
-    padding: var(--space-2xl) 5%;
-    background-color: var(--bg-color);
-}
-
-.coaches-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: var(--space-xl);
-    margin-top: var(--space-xl);
-}
-
-.coach-card {
-    background-color: var(--card-bg);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--card-shadow);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.coach-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-.coach-image {
-    width: 100%;
-    height: 250px;
-    overflow: hidden;
-}
-
-.coach-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.coach-card:hover .coach-image img {
-    transform: scale(1.05);
-}
-
-.coach-info {
-    padding: var(--space-lg);
-}
-
-.coach-info h3 {
-    font-size: var(--font-size-lg);
-    color: var(--primary-color);
-    margin-bottom: var(--space-md);
-    text-align: center;
-}
-
-.coach-details {
-    margin-bottom: var(--space-lg);
-}
-
-.detail-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--space-sm) 0;
-    border-bottom: 1px solid var(--bg-color-secondary);
-}
-
-.detail-item:last-child {
-    border-bottom: none;
-}
-
-.detail-item .label {
-    font-weight: 600;
-    color: var(--text-color);
-    font-size: var(--font-size-sm);
-}
-
-.detail-item .value {
-    color: var(--accent-color-dark);
-    font-weight: 500;
-    font-size: var(--font-size-sm);
-}
-
-.coach-description {
-    color: var(--text-light);
-    line-height: 1.7;
-    font-size: var(--font-size-sm);
-    margin-bottom: 0;
-}
-
-@media (max-width: 768px) {
-    .coaches-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-lg);
-    }
-    
-    .coach-image {
-        height: 200px;
-    }
-    
-    .detail-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--space-xs);
-    }
-}
 
 /* Newsletter page styles */
 .newsletter-simple {
@@ -929,11 +824,11 @@ footer {
 }
 
 .social-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: inline-block;
     width: 40px;
     height: 40px;
+    line-height: 40px;
+    text-align: center;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     transition: background-color 0.3s, transform 0.3s;
@@ -942,6 +837,7 @@ footer {
 .social-icon svg {
     width: 20px;
     height: 20px;
+    vertical-align: middle;
 }
 
 .social-icon:hover {
@@ -3146,6 +3042,427 @@ footer {
     .player-info {
         padding: var(--space-xs);
     }
+}
+
+/* Social Media Page Styles */
+.social-media-section {
+    padding: var(--space-2xl) 0;
+    background-color: var(--bg-color);
+}
+
+.social-buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.social-media-button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+    padding: var(--space-xl);
+    background-color: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--card-shadow);
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.social-media-button:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+}
+
+.social-media-button.facebook:hover {
+    border-color: #1877F2;
+    background-color: #f8f9ff;
+}
+
+.social-media-button.instagram:hover {
+    border-color: #E4405F;
+    background-color: #fff8f9;
+}
+
+.social-icon-large {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.social-media-button.facebook .social-icon-large {
+    background-color: #1877F2;
+}
+
+.social-media-button.instagram .social-icon-large {
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+}
+
+.social-icon-large svg {
+    width: 40px;
+    height: 40px;
+    stroke: white;
+}
+
+.social-content h3 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-sm);
+    color: var(--text-dark);
+}
+
+.social-content p {
+    font-size: var(--font-size-base);
+    color: var(--text-light);
+    margin: 0;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .social-media-button {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-lg);
+        padding: var(--space-lg);
+    }
+    
+    .social-icon-large {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .social-icon-large svg {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+/* Coaches Timeline Section Fixes */
+.coaches-timeline-section {
+    background-color: var(--bg-color-secondary);
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-2xl);
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.timeline {
+    position: relative;
+    max-width: 1200px; /* Increased from 1000px */
+    margin: 0 auto;
+    padding: var(--space-xl) 0;
+}
+
+/* Center the timeline line properly */
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    background-color: var(--accent-color);
+    transform: translateX(-50%);
+    border-radius: var(--radius-full);
+    z-index: 1;
+}
+
+/* Timeline items layout */
+.timeline-item {
+    position: relative;
+    margin-bottom: var(--space-2xl);
+    display: flex;
+    width: 100%;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    animation: none !important;
+}
+
+/* Left side items (odd items) */
+.timeline-item:nth-child(odd) {
+    justify-content: flex-end;
+    padding-right: calc(50% + 30px); /* Space for timeline marker */
+    padding-left: 0;
+}
+
+/* Right side items (even items) */
+.timeline-item:nth-child(even) {
+    justify-content: flex-start;
+    padding-left: calc(50% + 30px); /* Space for timeline marker */
+    padding-right: 0;
+}
+
+/* Timeline marker (dot) */
+.timeline-marker {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: var(--accent-color);
+    border: 4px solid var(--card-bg);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    box-shadow: 0 0 0 4px var(--accent-color);
+}
+
+/* Current coach marker with pulse animation */
+.timeline-item.current .timeline-marker {
+    background-color: var(--accent-color);
+    animation: pulse 2s infinite;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    }
+}
+
+/* Timeline content container */
+.timeline-content {
+    width: 100%;
+    max-width: 500px; /* Increased from default */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08), 0 6px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Coach card layout */
+.coach-card {
+    background-color: var(--card-bg);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column;
+    min-height: 400px; /* Ensure consistent height */
+}
+
+/* Coach card sections */
+.coach-left {
+    padding: var(--space-lg);
+    background-color: var(--bg-color-secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.coach-right {
+    padding: var(--space-lg);
+    flex: 1;
+}
+
+/* Timeline period styling */
+.timeline-period {
+    background-color: var(--primary-color);
+    color: white;
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: var(--font-size-sm);
+    text-align: center;
+    margin-bottom: var(--space-md);
+}
+
+/* Coach photo sizing - doubled as requested */
+.coach-photo {
+    width: 160px; /* Doubled from ~80px */
+    height: 160px; /* Doubled from ~80px */
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid var(--accent-color);
+    flex-shrink: 0;
+}
+
+.coach-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Coach info section */
+.coach-info h3 {
+    color: var(--primary-color);
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-md);
+    line-height: 1.2;
+}
+
+/* Coach details grid */
+.coach-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.detail-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+}
+
+.detail-item .label {
+    font-weight: 600;
+    color: var(--text-dark);
+    min-width: 80px;
+    flex-shrink: 0;
+}
+
+.detail-item .value {
+    color: var(--text-light);
+    flex: 1;
+}
+
+/* Coach description */
+.coach-description {
+    color: var(--text-light);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Founding coach special styling */
+.timeline-item.founding .timeline-marker {
+    background-color: #10b981; /* Special green color for founder */
+    box-shadow: 0 0 0 4px #10b981;
+}
+
+.timeline-item.founding .coach-left {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.timeline-item.founding .timeline-period {
+    background-color: #065f46;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 1024px) {
+    .timeline {
+        max-width: 800px;
+    }
+    
+    .timeline-content {
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Stack timeline vertically on mobile */
+    .timeline::before {
+        left: 30px;
+        transform: none;
+    }
+    
+    .timeline-marker {
+        left: 30px;
+        transform: translateX(-50%);
+    }
+    
+    .timeline-item,
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        justify-content: flex-start;
+        padding-left: 60px;
+        padding-right: var(--space-lg);
+    }
+    
+    .timeline-content {
+        max-width: 100%;
+    }
+    
+    .coach-card {
+        min-height: auto;
+    }
+    
+    .coach-photo {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+/* Mobile Timeline Styles */
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 20px;
+    }
+    
+    .timeline-marker {
+        left: 10px;
+        width: 16px;
+        height: 16px;
+    }
+    
+    .timeline-content {
+        margin-left: var(--space-lg);
+        padding: var(--space-lg);
+        min-height: auto;
+    }
+    
+    .coach-card {
+        flex-direction: column;
+        gap: var(--space-lg);
+    }
+    
+    .coach-left {
+        align-items: center;
+        text-align: center;
+    }
+    
+    .coach-photo {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .coach-info {
+        gap: var(--space-sm);
+    }
+    
+    .coach-card h3 {
+        font-size: var(--font-size-lg);
+    }
+    
+    .detail-item {
+        justify-content: center;
+        gap: var(--space-xs);
+    }
+    
+    .detail-item .label {
+        min-width: auto;
+        font-size: var(--font-size-sm);
+    }
+    
+    .detail-item .value {
+        font-size: var(--font-size-sm);
+    }
+    
+    .coach-description {
+        font-size: var(--font-size-sm);
+        text-align: left;
+    }
+    
+    .timeline-period {
+        font-size: var(--font-size-sm);
+        padding: var(--space-xs) var(--space-sm);
+    }
+}
     
     .player-name {
         font-size: var(--font-size-sm);
