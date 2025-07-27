@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mobile navigation toggle functionality
     setupMobileNav();
     
-    // Initialize upcoming match countdown
-    initMatchCountdown();
+    // Load upcoming matches on home page
+    initUpcomingMatches();
     
     // Image lazy loading
     setupLazyLoading();
@@ -300,6 +300,100 @@ document.addEventListener('DOMContentLoaded', function() {
     initDonationPage();
 });
 
+// Initialize upcoming matches on home page
+function initUpcomingMatches() {
+    if (document.querySelector('.upcoming-matches')) {
+        loadUpcomingMatches();
+    }
+}
+
+// Load upcoming matches from CSV
+async function loadUpcomingMatches() {
+    try {
+        const response = await fetch('match-results.csv');
+        const csvText = await response.text();
+        const matches = parseCSV(csvText);
+        
+        // Filter for upcoming matches
+        const now = new Date();
+        const upcomingMatches = matches.filter(match => {
+            const matchDate = new Date(match.date);
+            return matchDate > now && !isNaN(matchDate.getTime());
+        }).sort((a, b) => new Date(a.date) - new Date(b.date)).slice(0, 3); // Get next 3 matches
+        
+        displayUpcomingMatches(upcomingMatches);
+    } catch (error) {
+        console.error('Error loading upcoming matches:', error);
+        displayUpcomingMatchesError();
+    }
+}
+
+// Display upcoming matches on home page
+function displayUpcomingMatches(matches) {
+    const container = document.querySelector('.upcoming-matches .matches-container');
+    if (!container) return;
+    
+    if (matches.length === 0) {
+        container.innerHTML = '<p>No upcoming matches scheduled at this time.</p>';
+        return;
+    }
+    
+    container.innerHTML = matches.map(match => createUpcomingMatchCard(match)).join('');
+}
+
+// Create upcoming match card HTML
+function createUpcomingMatchCard(match) {
+    const matchDate = new Date(match.date);
+    const month = matchDate.toLocaleDateString('en-US', { month: 'short' });
+    const day = matchDate.getDate();
+    const year = matchDate.getFullYear();
+    
+    const isDoggHome = match.home.toLowerCase().includes('dogg');
+    const opponent = isDoggHome ? match.away : match.home;
+    const venue = match.location || (isDoggHome ? 'Winona, MN' : 'Away');
+    
+    return `
+        <div class="match">
+            <div class="match-date">
+                <span class="month">${month}</span>
+                <span class="day">${day}</span>
+                <span class="year">${year}</span>
+            </div>
+            <div class="match-teams">
+                <div class="team ${isDoggHome ? 'home' : 'away'}">
+                    <span class="team-name">${isDoggHome ? 'WSU Rugby' : opponent}</span>
+                </div>
+                <div class="vs">
+                    <span>VS</span>
+                </div>
+                <div class="team ${isDoggHome ? 'away' : 'home'}">
+                    <span class="team-name">${isDoggHome ? opponent : 'WSU Rugby'}</span>
+                </div>
+            </div>
+            <div class="match-info">
+                <div class="match-venue">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    <span>${venue}</span>
+                </div>
+                <div class="match-event">
+                    <span>${match.event || 'Regular Season'}</span>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Display error message for upcoming matches
+function displayUpcomingMatchesError() {
+    const container = document.querySelector('.upcoming-matches .matches-container');
+    if (container) {
+        container.innerHTML = '<p>Unable to load upcoming matches. Please try refreshing the page.</p>';
+    }
+}
+
 // Initialize Results Page functionality
 function initResultsPage() {
     if (document.querySelector('.results-section')) {
@@ -329,7 +423,7 @@ function parseCSV(csvText) {
     const matches = [];
     
     for (let i = 1; i < lines.length; i++) {
-        const values = lines[i].split(',');
+        const values = parseCSVLine(lines[i]);
         if (values.length >= 7) {
             const match = {
                 date: values[0].trim(),
@@ -337,8 +431,8 @@ function parseCSV(csvText) {
                 away: values[2].trim(),
                 home_points: values[3].trim(),
                 away_points: values[4].trim(),
-                location: values[5].trim(),
-                event: values[6].trim()
+                location: values[5].trim().replace(/^"|"$/g, ''), // Remove quotes from start and end
+                event: values[6].trim().replace(/^"|"$/g, '') // Remove quotes from start and end
             };
             
             // Determine season and result for the match
@@ -350,6 +444,29 @@ function parseCSV(csvText) {
     }
     
     return matches.sort((a, b) => new Date(b.date) - new Date(a.date));
+}
+
+// Parse a single CSV line handling quoted values
+function parseCSVLine(line) {
+    const values = [];
+    let current = '';
+    let inQuotes = false;
+    
+    for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        
+        if (char === '"') {
+            inQuotes = !inQuotes;
+        } else if (char === ',' && !inQuotes) {
+            values.push(current);
+            current = '';
+        } else {
+            current += char;
+        }
+    }
+    
+    values.push(current); // Add the last value
+    return values;
 }
 
 // Determine season from date
@@ -544,6 +661,7 @@ function createSeasonSummary(season, matches) {
                         <th>Date</th>
                         <th>Opponent</th>
                         <th>Location</th>
+                        <th>Event</th>
                         <th>Result</th>
                         <th>Score</th>
                     </tr>
@@ -577,7 +695,8 @@ function calculateSeasonStats(matches) {
 // Create individual match row
 function createMatchRow(match) {
     const opponent = match.home.toLowerCase().includes('dogg') ? match.away : match.home;
-    const location = match.home.toLowerCase().includes('dogg') ? 'Home' : 'Away';
+    const location = match.location || 'Location TBD';
+    const event = match.event || 'Regular Season';
     const formattedDate = formatDate(match.date);
     
     return `
@@ -585,6 +704,7 @@ function createMatchRow(match) {
             <td>${formattedDate}</td>
             <td>${opponent}</td>
             <td>${location}</td>
+            <td>${event}</td>
             <td>${match.result.result}</td>
             <td>${match.result.score}</td>
         </tr>
