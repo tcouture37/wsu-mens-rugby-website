@@ -302,84 +302,362 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Initialize Results Page functionality
 function initResultsPage() {
-    // Filter buttons functionality
-    const filterButtons = document.querySelectorAll('.filter-button');
-    const seasonSummaries = document.querySelectorAll('.season-summary');
-    const historicResults = document.querySelector('.historic-results');
+    if (document.querySelector('.results-section')) {
+        loadMatchResults();
+    }
+}
+
+// Load and parse match results from CSV
+async function loadMatchResults() {
+    try {
+        const response = await fetch('match-results.csv');
+        const csvText = await response.text();
+        const matches = parseCSV(csvText);
+        
+        displayResults(matches);
+        setupSeasonFiltering(matches);
+    } catch (error) {
+        console.error('Error loading match results:', error);
+        displayErrorMessage();
+    }
+}
+
+// Parse CSV data into match objects
+function parseCSV(csvText) {
+    const lines = csvText.trim().split('\n');
+    const headers = lines[0].split(',');
+    const matches = [];
     
-    if (filterButtons.length > 0 && seasonSummaries.length > 0) {
-        filterButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Remove active class from all buttons
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                
-                // Add active class to clicked button
-                this.classList.add('active');
-                
-                // Get season filter value
-                const season = this.getAttribute('data-season');
-                
-                // Handle filtering logic
-                if (season === 'all') {
-                    // Show all seasons
-                    seasonSummaries.forEach(summary => summary.style.display = 'block');
-                    if (historicResults) historicResults.style.display = 'block';
-                } else if (season === 'archive') {
-                    // Show only archive
-                    seasonSummaries.forEach(summary => summary.style.display = 'none');
-                    if (historicResults) historicResults.style.display = 'block';
-                } else {
-                    // Show specific season
-                    if (historicResults) historicResults.style.display = 'none';
-                    seasonSummaries.forEach(summary => {
-                        const seasonHeader = summary.querySelector('h3').textContent;
-                        if (seasonHeader.includes(season)) {
-                            summary.style.display = 'block';
-                        } else {
-                            summary.style.display = 'none';
-                        }
-                    });
-                }
-            });
+    for (let i = 1; i < lines.length; i++) {
+        const values = lines[i].split(',');
+        if (values.length >= 7) {
+            const match = {
+                date: values[0].trim(),
+                home: values[1].trim(),
+                away: values[2].trim(),
+                home_points: values[3].trim(),
+                away_points: values[4].trim(),
+                location: values[5].trim(),
+                event: values[6].trim()
+            };
+            
+            // Determine season and result for the match
+            match.season = determineSeason(match.date);
+            match.result = determineResult(match);
+            
+            matches.push(match);
+        }
+    }
+    
+    return matches.sort((a, b) => new Date(b.date) - new Date(a.date));
+}
+
+// Determine season from date
+function determineSeason(dateStr) {
+    const date = new Date(dateStr);
+    if (isNaN(date)) {
+        // Handle different date formats
+        const parts = dateStr.split('/');
+        if (parts.length === 3) {
+            const month = parseInt(parts[0]);
+            const year = parseInt(parts[2]);
+            
+            if (month >= 8) {
+                return `${year}-${year + 1}`;
+            } else {
+                return `${year - 1}-${year}`;
+            }
+        }
+        return 'Unknown';
+    }
+    
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    
+    if (month >= 8) {
+        return `${year}-${year + 1}`;
+    } else {
+        return `${year - 1}-${year}`;
+    }
+}
+
+// Determine match result and color coding
+function determineResult(match) {
+    const { home, away, home_points, away_points } = match;
+    const isDoggHome = home.toLowerCase().includes('dogg');
+    const isDoggAway = away.toLowerCase().includes('dogg');
+    
+    // Handle W/L format
+    if (home_points === 'W' || home_points === 'L' || away_points === 'W' || away_points === 'L') {
+        if (isDoggHome) {
+            return {
+                result: home_points === 'W' ? 'Win' : 'Loss',
+                color: home_points === 'W' ? 'green' : 'red',
+                score: `${home_points}-${away_points}`
+            };
+        } else if (isDoggAway) {
+            return {
+                result: away_points === 'W' ? 'Win' : 'Loss',
+                color: away_points === 'W' ? 'green' : 'red',
+                score: `${away_points}-${home_points}`
+            };
+        }
+    }
+    
+    // Handle numeric scores
+    if (home_points && away_points && !isNaN(home_points) && !isNaN(away_points)) {
+        const homeScore = parseInt(home_points);
+        const awayScore = parseInt(away_points);
+        
+        if (homeScore === awayScore) {
+            return {
+                result: 'Draw',
+                color: 'orange',
+                score: `${homeScore}-${awayScore}`
+            };
+        }
+        
+        if (isDoggHome) {
+            return {
+                result: homeScore > awayScore ? 'Win' : 'Loss',
+                color: homeScore > awayScore ? 'green' : 'red',
+                score: `${homeScore}-${awayScore}`
+            };
+        } else if (isDoggAway) {
+            return {
+                result: awayScore > homeScore ? 'Win' : 'Loss',
+                color: awayScore > homeScore ? 'green' : 'red',
+                score: `${awayScore}-${homeScore}`
+            };
+        }
+    }
+    
+    // Handle empty scores - check if match is in the past
+    const matchDate = new Date(match.date);
+    const now = new Date();
+    
+    // If the match date is in the past and no score is available, use shrug emoji
+    if (matchDate < now && !isNaN(matchDate.getTime())) {
+        return {
+            result: '¯\\_(ツ)_/¯',
+            color: 'orange',
+            score: '¯\\_(ツ)_/¯'
+        };
+    }
+    
+    // Otherwise, it's an upcoming match
+    return {
+        result: 'TBD',
+        color: 'orange',
+        score: 'TBD'
+    };
+}
+
+// Display results grouped by season
+function displayResults(matches) {
+    const resultsSection = document.querySelector('.results-section .container');
+    if (!resultsSection) return;
+    
+    // Group matches by season
+    const seasonGroups = {};
+    matches.forEach(match => {
+        if (!seasonGroups[match.season]) {
+            seasonGroups[match.season] = [];
+        }
+        seasonGroups[match.season].push(match);
+    });
+    
+    // Clear existing content
+    resultsSection.innerHTML = '';
+    
+    // Generate season filter buttons
+    generateSeasonFilters(Object.keys(seasonGroups));
+    
+    // Create season summaries
+    Object.keys(seasonGroups).sort((a, b) => b.localeCompare(a)).forEach(season => {
+        const seasonMatches = seasonGroups[season];
+        const seasonSummary = createSeasonSummary(season, seasonMatches);
+        resultsSection.appendChild(seasonSummary);
+    });
+}
+
+// Generate season filter buttons
+function generateSeasonFilters(seasons) {
+    const filterSection = document.querySelector('.results-filter .filter-buttons');
+    if (!filterSection) return;
+    
+    filterSection.innerHTML = '';
+    
+    // Add "All Seasons" button
+    const allButton = document.createElement('button');
+    allButton.className = 'filter-button active';
+    allButton.setAttribute('data-season', 'all');
+    allButton.textContent = 'All Seasons';
+    filterSection.appendChild(allButton);
+    
+    // Add season-specific buttons
+    seasons.sort((a, b) => b.localeCompare(a)).forEach(season => {
+        const button = document.createElement('button');
+        button.className = 'filter-button';
+        button.setAttribute('data-season', season);
+        button.textContent = season;
+        filterSection.appendChild(button);
+    });
+}
+
+// Create season summary element
+function createSeasonSummary(season, matches) {
+    const summary = document.createElement('div');
+    summary.className = 'season-summary';
+    summary.setAttribute('data-season', season);
+    
+    // Calculate season stats
+    const stats = calculateSeasonStats(matches);
+    
+    summary.innerHTML = `
+        <div class="season-header">
+            <h3>${season} Season</h3>
+            <div class="season-stats">
+                <div class="season-stat">
+                    <span class="stat-value">${stats.wins}</span>
+                    <span class="stat-label">Wins</span>
+                </div>
+                <div class="season-stat">
+                    <span class="stat-value">${stats.losses}</span>
+                    <span class="stat-label">Losses</span>
+                </div>
+                <div class="season-stat">
+                    <span class="stat-value">${stats.draws}</span>
+                    <span class="stat-label">Draws</span>
+                </div>
+                <div class="season-stat">
+                    <span class="stat-value">${stats.winRate}%</span>
+                    <span class="stat-label">Win Rate</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="results-table-container">
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Opponent</th>
+                        <th>Location</th>
+                        <th>Result</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${matches.map(match => createMatchRow(match)).join('')}
+                </tbody>
+            </table>
+        </div>
+    `;
+    
+    return summary;
+}
+
+// Calculate season statistics
+function calculateSeasonStats(matches) {
+    let wins = 0, losses = 0, draws = 0;
+    
+    matches.forEach(match => {
+        if (match.result.result === 'Win') wins++;
+        else if (match.result.result === 'Loss') losses++;
+        else if (match.result.result === 'Draw') draws++;
+    });
+    
+    const totalGames = wins + losses + draws;
+    const winRate = totalGames > 0 ? Math.round((wins / totalGames) * 100) : 0;
+    
+    return { wins, losses, draws, winRate };
+}
+
+// Create individual match row
+function createMatchRow(match) {
+    const opponent = match.home.toLowerCase().includes('dogg') ? match.away : match.home;
+    const location = match.home.toLowerCase().includes('dogg') ? 'Home' : 'Away';
+    const formattedDate = formatDate(match.date);
+    
+    return `
+        <tr class="${match.result.color}">
+            <td>${formattedDate}</td>
+            <td>${opponent}</td>
+            <td>${location}</td>
+            <td>${match.result.result}</td>
+            <td>${match.result.score}</td>
+        </tr>
+    `;
+}
+
+// Format date for display
+function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    if (!isNaN(date)) {
+        return date.toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
         });
     }
     
-    // Historic seasons expandable functionality
-    const historicHeaders = document.querySelectorAll('.historic-season-header');
+    // Handle MM/DD/YYYY format
+    const parts = dateStr.split('/');
+    if (parts.length === 3) {
+        const month = parseInt(parts[0]);
+        const day = parseInt(parts[1]);
+        const year = parseInt(parts[2]);
+        const date = new Date(year, month - 1, day);
+        return date.toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        });
+    }
     
-    if (historicHeaders.length > 0) {
-        historicHeaders.forEach(header => {
-            header.addEventListener('click', function() {
-                const seasonId = this.getAttribute('data-season');
-                const details = document.getElementById('season-' + seasonId);
-                const toggleIcon = this.querySelector('.toggle-icon');
-                
-                // Toggle the display of details
-                if (details.style.display === 'block') {
-                    details.style.display = 'none';
-                    toggleIcon.textContent = '+';
+    return dateStr;
+}
+
+// Setup season filtering functionality
+function setupSeasonFiltering(matches) {
+    const filterButtons = document.querySelectorAll('.filter-button');
+    const seasonSummaries = document.querySelectorAll('.season-summary');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // Get season filter value
+            const season = this.getAttribute('data-season');
+            
+            // Filter seasons
+            seasonSummaries.forEach(summary => {
+                if (season === 'all') {
+                    summary.style.display = 'block';
                 } else {
-                    // Load season details via AJAX or reveal pre-loaded content
-                    details.style.display = 'block';
-                    toggleIcon.textContent = '−';
-                    
-                    // For demo purposes, we're just setting a placeholder message
-                    if (details.innerHTML.trim() === '') {
-                        details.innerHTML = `<p class="loading-data">Loading ${seasonId} season data...</p>`;
-                        
-                        // Simulate loading data
-                        setTimeout(() => {
-                            details.innerHTML = `
-                                <div class="historic-details-content">
-                                    <div class="historic-record">Final Record: ${Math.floor(Math.random() * 10)}-${Math.floor(Math.random() * 5)}-${Math.floor(Math.random() * 2)}</div>
-                                    <p>Detailed season results would be displayed here for the ${seasonId} season.</p>
-                                </div>
-                            `;
-                        }, 1000);
-                    }
+                    const summarySeasonAttr = summary.getAttribute('data-season');
+                    summary.style.display = summarySeasonAttr === season ? 'block' : 'none';
                 }
             });
         });
+    });
+}
+
+// Display error message if CSV loading fails
+function displayErrorMessage() {
+    const resultsSection = document.querySelector('.results-section .container');
+    if (resultsSection) {
+        resultsSection.innerHTML = `
+            <div class="error-message">
+                <h3>Unable to load match results</h3>
+                <p>Please try refreshing the page or contact us if the problem persists.</p>
+            </div>
+        `;
     }
 }
 
