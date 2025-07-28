@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Scrum | Winona State Men's Rugby</title>
+    <meta name="description" content="Join the Winona State University Men's Rugby team - build brotherhood, develop strength, and create lifelong memories">
+    <link rel="icon" href="images/coat_of_arms_01.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and base styles */
+        :root {
+            /* Colors */
+            --primary-color: #0f172a;     
+            --primary-color-light: #1e293b;
+            --accent-color: #ffd700;      
+            --accent-color-dark: #e6c200;
+            --text-color: #1e293b;        
+            --text-light: #64748b;        
+            --text-dark: #0f172a;         
+            --bg-color: #f8fafc;          
+            --bg-color-secondary: #f1f5f9;
+            --card-bg: #ffffff;
+            --card-shadow: 0 8px 16px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.03);
+            
+            /* Typography */
+            --font-size-xs: clamp(0.7rem, 0.7vw, 0.8rem);
+            --font-size-sm: clamp(0.8rem, 0.8vw, 0.9rem);
+            --font-size-base: clamp(1rem, 1vw, 1.1rem);
+            --font-size-md: clamp(1.1rem, 1.2vw, 1.3rem);
+            --font-size-lg: clamp(1.5rem, 1.8vw, 2rem);
+            --font-size-xl: clamp(2rem, 3vw, 3rem);
+            --font-size-2xl: clamp(2.5rem, 4vw, 4rem);
+            
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 2rem;
+            --space-xl: 4rem;
+            --space-2xl: 8rem;
+            
+            /* Border radius */
+            --radius-sm: 0.25rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 1rem;
+            --radius-full: 9999px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        /* Typography styles */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: var(--font-size-xl);
+        }
+
+        h2 {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--space-lg);
+        }
+
+        h3 {
+            font-size: var(--font-size-md);
+            margin-bottom: var(--space-md);
+        }
+
+        p {
+            margin-bottom: var(--space-md);
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        /* Container for sections */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-lg);
+        }
+
+        /* Header and Navigation */
+        header {
+            background-color: var(--primary-color);
+            padding: var(--space-md) 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .logo-img {
+            width: 40px;
+            height: auto;
+        }
+
+        .logo h1 {
+            color: white;
+            font-size: var(--font-size-md);
+            font-weight: 700;
+        }
+
+        .nav-container {
+            position: relative;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: var(--space-lg);
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: var(--font-size-sm);
+            transition: color 0.3s;
+            padding: var(--space-xs) 0;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-color);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 24px;
+            width: 30px;
+            padding: 0;
+        }
+
+        .mobile-toggle span {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+
+        /* Page hero for secondary pages */
+        .page-hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color-light) 70%, var(--accent-color-dark) 100%);
+            color: white;
+            text-align: center;
+            padding: var(--space-2xl) var(--space-md);
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .page-hero .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-hero h2 {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--space-sm);
+            font-weight: 900;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .page-hero p {
+            font-size: var(--font-size-md);
+            font-weight: 300;
+            margin-bottom: 0;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Section Styles */
+        section {
+            padding: var(--space-xl) 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .section-header h2 {
+            font-size: var(--font-size-xl);
+            color: var(--primary-color);
+            position: relative;
+            font-weight: 800;
+            margin-bottom: var(--space-lg);
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--accent-color);
+            border-radius: var(--radius-full);
+        }
+
+        .section-header p {
+            font-size: var(--font-size-md);
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Benefits Grid - FIXED CENTERING */
+        .benefits-grid {
+            padding: var(--space-xl) 0;
+            background-color: var(--bg-color-secondary);
+        }
+
+        .benefits-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-xl);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-lg);
+        }
+
+        .benefit-card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08), 0 8px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: var(--space-lg);
+            display: block;
+        }
+
+        .benefit-card h3 {
+            color: var(--primary-color);
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--space-md);
+        }
+
+        .benefit-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Requirements Section - FIXED CENTERING */
+        .join-requirements {
+            padding: var(--space-xl) 0;
+        }
+
+        .requirements-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-lg);
+            text-align: center;
+        }
+
+        .requirements-content h2 {
+            font-size: var(--font-size-xl);
+            color: var(--primary-color);
+            margin-bottom: var(--space-xl);
+            font-weight: 800;
+            position: relative;
+        }
+
+        .requirements-content h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--accent-color);
+            border-radius: var(--radius-full);
+        }
+
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .requirement-item {
+            background-color: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease;
+            text-align: left;
+        }
+
+        .requirement-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .requirement-item h3 {
+            color: var(--primary-color);
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--space-md);
+        }
+
+        .requirement-item p {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* CTA Section - FIXED CENTERING */
+        .join-cta {
+            padding: var(--space-xl) 0;
+            background-color: var(--bg-color-secondary);
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 var(--space-lg);
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-size: var(--font-size-xl);
+            color: var(--primary-color);
+            margin-bottom: var(--space-lg);
+            font-weight: 800;
+        }
+
+        .cta-content p {
+            font-size: var(--font-size-md);
+            color: var(--text-light);
+            margin-bottom: var(--space-xl);
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: var(--space-lg);
+            justify-content: center;
+            margin-bottom: var(--space-xl);
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: var(--space-lg) var(--space-xl);
+            font-size: var(--font-size-base);
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .cta-button.primary {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        .cta-button.primary:hover {
+            background-color: var(--accent-color-dark);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button.secondary {
+            background-color: var(--primary-color);
+            color: white;
+            border: 2px solid var(--primary-color);
+        }
+
+        .cta-button.secondary:hover {
+            background-color: var(--primary-color-light);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-info {
+            text-align: center;
+        }
+
+        .contact-info p {
+            color: var(--text-light);
+            font-size: var(--font-size-base);
+            margin: 0;
+        }
+
+        .contact-info strong {
+            color: var(--primary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: flex;
+            }
+            
+            .nav-links {
+                position: absolute;
+                flex-direction: column;
+                background-color: var(--primary-color);
+                top: 100%;
+                right: -20px;
+                width: 200px;
+                padding: var(--space-md);
+                border-radius: var(--radius-md);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+                gap: var(--space-sm);
+                transform: translateY(10px);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                z-index: 100;
+            }
+            
+            .nav-links.show {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .benefits-container {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+                padding: 0 var(--space-md);
+            }
+
+            .requirements-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: var(--space-md);
+            }
+
+            .cta-button {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .page-hero {
+                padding: var(--space-xl) var(--space-md);
+            }
+
+            section {
+                padding: var(--space-lg) 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .benefits-container,
+            .requirements-content,
+            .cta-content {
+                padding: 0 var(--space-sm);
+            }
+
+            .benefit-card,
+            .requirement-item {
+                padding: var(--space-lg);
+            }
+
+            .section-header h2,
+            .requirements-content h2,
+            .cta-content h2 {
+                font-size: var(--font-size-lg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="main-nav">
+            <div class="logo">
+                <img src="images/coat_of_arms_01.png" alt="WSU Rugby Logo" class="logo-img">
+                <h1>WSU Men's Rugby</h1>
+            </div>
+            <div class="nav-container">
+                <button class="mobile-toggle" aria-label="Toggle navigation menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="coaches.html">Coaches</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="history.html">History</a></li>
+                    <li><a href="newsletter.html">Newsletter</a></li>
+                    <li><a href="social.html">Social</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                    <li><a href="https://www.worldrugbyshop.com/collections/winona-state-university">Shop</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h2>Join the Scrum</h2>
+            <p>Where Champions Are Forged</p>
+        </div>
+    </section>
+
+    <section class="join-intro">
+        <div class="container">
+            <div class="section-header">
+                <h2>Ready to Transform Your College Experience?</h2>
+                <p>Winona State Men's Rugby isn't just a sport – it's a brotherhood that shapes leaders, builds character, and creates memories that last a lifetime. No experience required, just the courage to step up.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits-grid">
+        <div class="benefits-container">
+            <div class="benefit-card">
+                <div class="benefit-icon">🤝</div>
+                <h3>Unbreakable Brotherhood</h3>
+                <p>Join a tight-knit family of warriors who have your back on and off the field. The bonds forged through rugby training and competition create friendships that extend far beyond college years.</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">💪</div>
+                <h3>Peak Physical Conditioning</h3>
+                <p>Transform your body and mind through intense training that builds strength, endurance, and mental toughness. Develop the work ethic that will serve you in every aspect of life.</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">⚡</div>
+                <h3>Structured Excellence</h3>
+                <p>Master time management and personal accountability through a demanding schedule that teaches you to balance academics, athletics, and personal growth with precision.</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">🎯</div>
+                <h3>Mental Fortitude</h3>
+                <p>Build unshakeable self-discipline and resilience through challenges that push you beyond your limits. Learn to perform under pressure and never back down from adversity.</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">🔥</div>
+                <h3>Pure Adrenaline</h3>
+                <p>Experience the raw excitement of one of the world's most intense sports. From bone-crushing tackles to game-winning tries, every moment on the pitch is electric.</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">🏆</div>
+                <h3>Leadership Development</h3>
+                <p>Step into leadership roles that prepare you for success beyond rugby. Learn to motivate teammates, make split-second decisions, and lead by example under pressure.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="join-requirements">
+        <div class="requirements-content">
+            <h2>What It Takes</h2>
+            <div class="requirements-grid">
+                <div class="requirement-item">
+                    <h3>Heart Over Experience</h3>
+                    <p>Never played rugby? Perfect. We'll teach you everything you need to know. What we can't teach is heart, determination, and the willingness to give everything for your teammates.</p>
+                </div>
+                <div class="requirement-item">
+                    <h3>Commitment to Excellence</h3>
+                    <p>Be ready to push your limits in training, show up when it matters, and embrace the grind that separates champions from spectators.</p>
+                </div>
+                <div class="requirement-item">
+                    <h3>Team-First Mentality</h3>
+                    <p>Rugby is the ultimate team sport. Success comes from putting the pack before personal glory and supporting your brothers through every challenge.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="join-cta">
+        <div class="cta-content">
+            <h2>Don't Hesitate</h2>
+            <p>Don't spend your college years wondering "what if." Take the leap and discover what you're truly capable of.</p>
+            <div class="cta-buttons">
+                <a href="contact.html" class="cta-button primary">Contact Us Today</a>
+            </div>
+            <div class="contact-info">
+                <p><strong>Questions?</strong> Reach out anytime – we're here to help you take the first step toward joining the brotherhood.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Mobile navigation toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.mobile-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (mobileMenuButton && navLinks) {
+                mobileMenuButton.addEventListener('click', function() {
+                    navLinks.classList.toggle('show');
+                    
+                    // Animate the hamburger icon
+                    const spans = this.querySelectorAll('span');
+                    spans.forEach(span => span.classList.toggle('active'));
+                    
+                    // Accessibility
+                    const expanded = navLinks.classList.contains('show');
+                    this.setAttribute('aria-expanded', expanded);
+                });
+                
+                // Close menu when a link is clicked
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        navLinks.classList.remove('show');
+                        mobileMenuButton.querySelectorAll('span').forEach(span => span.classList.remove('active'));
+                        mobileMenuButton.setAttribute('aria-expanded', 'false');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

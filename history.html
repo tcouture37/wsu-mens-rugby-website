@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our History - Winona State Men's Rugby</title>
+    <meta name="description" content="The founding story of WSU Rugby as told by Mike Rusk, one of the original members">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/coat_of_arms_01.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* History page specific styles */
+        .history-content {
+            padding: var(--space-xl) 0;
+            background-color: var(--bg-color);
+        }
+
+        .history-intro {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .history-intro h2 {
+            font-size: var(--font-size-xl);
+            color: var(--primary-color);
+            margin-bottom: var(--space-lg);
+            font-weight: 800;
+        }
+
+        .history-intro p {
+            font-size: var(--font-size-md);
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .quote-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-color-light));
+            color: white;
+            padding: var(--space-xl);
+            text-align: center;
+        }
+
+        .quote-header h3 {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--space-sm);
+            font-weight: 700;
+        }
+
+        .quote-header p {
+            font-size: var(--font-size-base);
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        .quote-content {
+            padding: var(--space-2xl);
+        }
+
+        .quote-text {
+            font-size: var(--font-size-md);
+            line-height: 1.8;
+            color: var(--text-color);
+            font-style: italic;
+            position: relative;
+            margin-bottom: var(--space-xl);
+        }
+
+        .quote-text::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--accent-color);
+            position: absolute;
+            top: -10px;
+            left: -20px;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .quote-text::after {
+            content: '"';
+            font-size: 4rem;
+            color: var(--accent-color);
+            position: absolute;
+            bottom: -40px;
+            right: -10px;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .quote-attribution {
+            text-align: right;
+            padding-top: var(--space-lg);
+            border-top: 2px solid var(--accent-color);
+        }
+
+        .quote-attribution .author {
+            font-size: var(--font-size-lg);
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: var(--space-xs);
+        }
+
+        .quote-attribution .title {
+            font-size: var(--font-size-base);
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .historical-note {
+            background-color: var(--bg-color-secondary);
+            border-left: 4px solid var(--accent-color);
+            padding: var(--space-lg);
+            margin-top: var(--space-xl);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        .historical-note h4 {
+            color: var(--primary-color);
+            margin-bottom: var(--space-sm);
+            font-size: var(--font-size-base);
+            font-weight: 700;
+        }
+
+        .historical-note p {
+            color: var(--text-light);
+            font-size: var(--font-size-sm);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .quote-content {
+                padding: var(--space-lg);
+            }
+
+            .quote-text {
+                font-size: var(--font-size-base);
+                padding: 0 var(--space-lg);
+            }
+
+            .quote-text::before,
+            .quote-text::after {
+                font-size: 3rem;
+            }
+
+            .quote-text::before {
+                left: -10px;
+            }
+
+            .quote-text::after {
+                right: -5px;
+            }
+
+            .history-intro h2 {
+                font-size: var(--font-size-lg);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .quote-header,
+            .quote-content {
+                padding: var(--space-md);
+            }
+
+            .quote-text {
+                padding: 0 var(--space-md);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="main-nav">
+            <div class="logo">
+                <img src="images/coat_of_arms_01.png" alt="WSU Rugby Logo" class="logo-img">
+                <h1>WSU Men's Rugby</h1>
+            </div>
+            <div class="nav-container">
+                <button class="mobile-toggle" aria-label="Toggle navigation menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="coaches.html">Coaches</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="history.html" class="active">History</a></li>
+                    <li><a href="newsletter.html">Newsletter</a></li>
+                    <li><a href="social.html">Social</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                    <li><a href="https://www.worldrugbyshop.com/collections/winona-state-university">Shop</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h2>Our History</h2>
+            <p>The founding story of WSU Rugby</p>
+        </div>
+    </section>
+
+    <section class="history-content">
+        <div class="container">
+
+            <div class="quote-container">
+                <div class="quote-header">
+                    <h3>The Founding of WSU Rugby</h3>
+                </div>
+                
+                <div class="quote-content">
+                    <div class="quote-text">
+                        It was late winter '89 when the whole thing got started. There was a small group of students interested in playing rugby, or for that matter, even knew what rugby was. The first posting was a photocopy on to white paper hung by scotch tape. It said something along the lines of.....starting a rugby club....meeting in Kryzsko commons. Lasantha Dainakie and Andy Klinker were the guys that took the bull by the horns, and hung those.
+
+                        <br><br>The first meeting was not much of a gathering. I remember Lasantha, Klinker, Specht, Pete Carlson, Paul McCarthy, and a couple of other guys......maybe 10 people total. We spook about any experience that we had with the game, and other people we could get to come out for the team. Not much experience at all. Lesantha was the rugby god compared to everyone else. He had been playing the game in his native land of Sri Lanka since he was 8 yrs. old. I had been around rugby since I was about 10. My four cousins played for the Dubuque men's side for many years. Besides that, I am not sure that anyone else knew the game?
+
+                        <br><br>To get started we made contact with the UWLaCrosse club, and their coach Dick Brewer. We explained that we were starting a new team, had low numbers, and needed some practical practice partners. The Doggs would go down to UWL twice a week during the beginning. It didn't take long for the numbers to grow, and the Doggs to catch on to the fundamentals of the game. We then started to practice on our own, and took it from there. Lasantha coached the backs, and I coached the forwards. We both coached the mental aspect of the game.
+
+                        <br><br>The first game was that spring against UWL.....we got killed! Not due to lack of effort, but the mental aspect of knowing where one should be in comparison to ball movement. The next couple of games we played much better. The Doggs were starting to dig in. I think it was the forth game of the season before we had a win. Not that the win was pretty, but it was a Dogg style win. The first Doggs were a very mean bunch. Tough, and willing to give up their body for the cause. Soon the Doggs had established themselves as a VERY physical team in the state. The mental aspect of the game continued to improve during the 1st season, and during the summer with guys picking up games back home at tourneys.
+
+                        <br><br>During the fall season of '89 the Doggs continued to improve, and also added some very good athletes to the team. The team was a serious contender to the state championship by the fall of '90. Dogg Rugby by that time was well known, and feared. The Doggs were not only the most physical team in the state, but becoming very game wise. Guys knew where to be, and what to do when they got there. If one of our 15 went down, we would bring in somebody that was just as good.
+
+                        <br><br>The Doggs made it to the final four the fall of '90 (took 4th), and '91 (took 3rd). The following year '92 the Doggs won their 1st state championship. After that following spring '93 most of the original Doggs had left the pound. That was pretty much the end of the original Doggs era........
+                    </div>
+
+                    <div class="quote-attribution">
+                        <div class="author">Mike Rusk</div>
+                        <div class="title">Rusker, the original #8</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

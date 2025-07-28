@@ -64,229 +64,6 @@
             }
         }
         
-        /* Make coach cards clickable */
-        .coach-card {
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .coach-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Gallery styles */
-        .coach-gallery {
-            position: absolute;
-            width: 1200px;
-            height: 1500px;
-            background: var(--card-bg);
-            border-radius: var(--radius-lg);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            opacity: 0;
-            visibility: hidden;
-            transform: scale(0.8);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .coach-gallery.active {
-            opacity: 1;
-            visibility: visible;
-            transform: scale(1);
-        }
-        
-        .gallery-header {
-            padding: var(--space-xl);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-        }
-        
-        .gallery-header h3 {
-            color: white;
-            margin: 0;
-            font-size: var(--font-size-2xl);
-            font-weight: 600;
-        }
-        
-        .gallery-close {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 36px;
-            cursor: pointer;
-            padding: var(--space-md);
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .gallery-close:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        
-        .gallery-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: var(--space-2xl);
-            position: relative;
-        }
-        
-        .gallery-image {
-            max-width: 90%;
-            max-height: 1000px;
-            object-fit: contain;
-            border-radius: var(--radius-lg);
-            box-shadow: 0 12px 60px rgba(0, 0, 0, 0.3);
-        }
-        
-        .gallery-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--primary-color);
-            border: none;
-            color: white;
-            font-size: 48px;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .gallery-nav:hover {
-            background: var(--accent-color);
-            transform: translateY(-50%) scale(1.1);
-        }
-        
-        .gallery-nav.prev {
-            left: var(--space-xl);
-        }
-        
-        .gallery-nav.next {
-            right: var(--space-xl);
-        }
-        
-        .gallery-counter {
-            margin-top: var(--space-xl);
-            color: var(--text-secondary);
-            font-size: var(--font-size-lg);
-            font-weight: 500;
-        }
-        
-        /* Mobile responsive gallery */
-        @media (max-width: 1600px) {
-            .coach-gallery {
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%) scale(0.8);
-                width: 90%;
-                max-width: 1000px;
-                height: 90vh;
-                max-height: 1200px;
-            }
-            
-            .coach-gallery.active {
-                transform: translate(-50%, -50%) scale(1);
-            }
-            
-            .gallery-image {
-                max-height: 800px;
-            }
-        }
-        
-        @media (max-width: 1024px) {
-            .coach-gallery {
-                width: 95%;
-                max-width: 800px;
-                height: 85vh;
-                max-height: 1000px;
-            }
-            
-            .gallery-image {
-                max-height: 600px;
-            }
-            
-            .gallery-nav {
-                font-size: 36px;
-                width: 60px;
-                height: 60px;
-            }
-            
-            .gallery-header h3 {
-                font-size: var(--font-size-xl);
-            }
-            
-            .gallery-close {
-                font-size: 28px;
-                width: 48px;
-                height: 48px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .coach-gallery {
-                width: 95%;
-                height: 80vh;
-                max-height: 800px;
-            }
-            
-            .gallery-image {
-                max-height: 400px;
-            }
-            
-            .gallery-nav {
-                font-size: 24px;
-                width: 40px;
-                height: 40px;
-            }
-            
-            .gallery-header {
-                padding: var(--space-lg);
-            }
-            
-            .gallery-content {
-                padding: var(--space-lg);
-            }
-        }
-        
-        /* Gallery backdrop */
-        .gallery-backdrop {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .gallery-backdrop.active {
-            opacity: 1;
-            visibility: visible;
-        }
     </style>
 </head>
 <body>
@@ -304,13 +81,15 @@
                 </button>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
+                    <li><a href="team.html">Team</a></li>
                     <li><a href="coaches.html" class="active">Coaches</a></li>
                     <li><a href="results.html">Results</a></li>
-                    <li><a href="social.html">Social</a></li>
+                    <li><a href="history.html">History</a></li>
                     <li><a href="newsletter.html">Newsletter</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="social.html">Social</a></li>
                     <li><a href="donate.html">Donate</a></li>
-                    <li><a href="https://www.worldrugbyshop.com/collections/winona-state-university" class="shop-link">Shop</a></li>
+                    <li><a href="https://www.worldrugbyshop.com/collections/winona-state-university">Shop</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
         </nav>
@@ -438,15 +217,23 @@
                             </div>
                             <div class="coach-right">
                                 <div class="coach-info">
-                                    <h3>John Schwarte and Jake "Cena" Letsinger</h3>
+                                    <h3>Jake "Cena" Letsinger and John Schwarte</h3>
                                     <div class="coach-details">
                                         <div class="detail-item">
-                                            <span class="label">Hometown:</span>
-                                            <span class="value">To be added</span>
+                                            <span class="label">Jake's Hometown:</span>
+                                            <span class="value">Buffalo, MN</span>
                                         </div>
                                         <div class="detail-item">
-                                            <span class="label">College:</span>
-                                            <span class="value">To be added</span>
+                                            <span class="label">Jake's College:</span>
+                                            <span class="value">Winona State</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">John's Hometown:</span>
+                                            <span class="value">Harlan, IA</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">John's College:</span>
+                                            <span class="value">Wayne State</span>
                                         </div>
                                     </div>
                                     <p class="coach-description">Dynamic coaching duo who brought energy and innovation to the program. Known for their motivational leadership and ability to inspire players to exceed their own expectations. Description to be added.</p>
@@ -472,11 +259,11 @@
                                     <div class="coach-details">
                                         <div class="detail-item">
                                             <span class="label">Hometown:</span>
-                                            <span class="value">To be added</span>
+                                            <span class="value">Mauston, WI</span>
                                         </div>
                                         <div class="detail-item">
                                             <span class="label">College:</span>
-                                            <span class="value">To be added</span>
+                                            <span class="value">Marquette</span>
                                         </div>
                                     </div>
                                     <p class="coach-description">Provided steady leadership and tactical expertise during his tenure. Focused on building a strong foundation of rugby fundamentals while fostering team camaraderie. Description to be added.</p>
@@ -502,11 +289,11 @@
                                     <div class="coach-details">
                                         <div class="detail-item">
                                             <span class="label">Hometown:</span>
-                                            <span class="value">To be added</span>
+                                            <span class="value">Lincolnshire, IL</span>
                                         </div>
                                         <div class="detail-item">
                                             <span class="label">College:</span>
-                                            <span class="value">To be added</span>
+                                            <span class="value">Winona State</span>
                                         </div>
                                     </div>
                                     <p class="coach-description">Previous tenure with the team, bringing valuable experience that would later inform his current coaching role. This earlier period helped him understand the program's traditions and culture. Description to be added.</p>
@@ -610,171 +397,7 @@
         </div>
     </section>
 
-    <!-- Gallery Backdrop -->
-    <div class="gallery-backdrop" id="galleryBackdrop"></div>
-    
-    <!-- Coach Gallery -->
-    <div class="coach-gallery" id="coachGallery">
-        <div class="gallery-header">
-            <h3 id="galleryTitle">Coach Gallery</h3>
-            <button class="gallery-close" id="galleryClose">&times;</button>
-        </div>
-        <div class="gallery-content">
-            <button class="gallery-nav prev" id="galleryPrev">&#8249;</button>
-            <img class="gallery-image" id="galleryImage" src="" alt="Coach Photo">
-            <button class="gallery-nav next" id="galleryNext">&#8250;</button>
-            <div class="gallery-counter" id="galleryCounter">1 / 4</div>
-        </div>
-    </div>
 
     <script src="js/main.js"></script>
-    <script>
-        // Coach gallery functionality
-        class CoachGallery {
-            constructor() {
-                this.gallery = document.getElementById('coachGallery');
-                this.backdrop = document.getElementById('galleryBackdrop');
-                this.galleryTitle = document.getElementById('galleryTitle');
-                this.galleryImage = document.getElementById('galleryImage');
-                this.galleryCounter = document.getElementById('galleryCounter');
-                this.closeBtn = document.getElementById('galleryClose');
-                this.prevBtn = document.getElementById('galleryPrev');
-                this.nextBtn = document.getElementById('galleryNext');
-                
-                this.currentImages = [];
-                this.currentIndex = 0;
-                this.currentCoach = '';
-                
-                // Placeholder images from players directory
-                this.placeholderImages = [
-                    'images/players/default-player.jpeg',
-                    'images/players/gdub.webp',
-                    'images/players/lincolnator.jpg',
-                    'images/players/tdawg.jpg'
-                ];
-                
-                this.init();
-            }
-            
-            init() {
-                // Add click handlers to all coach cards
-                const coachCards = document.querySelectorAll('.coach-card');
-                coachCards.forEach((card, index) => {
-                    card.addEventListener('click', () => {
-                        const timelineItem = card.closest('.timeline-item');
-                        const coachName = card.querySelector('h3').textContent;
-                        const isEvenItem = (index + 1) % 2 === 0;
-                        this.openGallery(coachName, isEvenItem, card);
-                    });
-                });
-                
-                // Gallery navigation
-                this.closeBtn.addEventListener('click', () => this.closeGallery());
-                this.prevBtn.addEventListener('click', () => this.prevImage());
-                this.nextBtn.addEventListener('click', () => this.nextImage());
-                
-                // Close on escape key
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && this.gallery.classList.contains('active')) {
-                        this.closeGallery();
-                    }
-                });
-                
-                // Close on backdrop click
-                this.backdrop.addEventListener('click', () => {
-                    this.closeGallery();
-                });
-            }
-            
-            openGallery(coachName, isEvenItem, clickedCard) {
-                this.currentCoach = coachName;
-                this.currentImages = [...this.placeholderImages];
-                this.currentIndex = 0;
-                
-                // Set gallery title
-                this.galleryTitle.textContent = `${coachName} Gallery`;
-                
-                // Position gallery next to the clicked card
-                this.positionGallery(clickedCard, isEvenItem);
-                
-                // Show gallery and backdrop
-                this.backdrop.classList.add('active');
-                this.gallery.classList.add('active');
-                this.updateImage();
-            }
-            
-            positionGallery(clickedCard, isEvenItem) {
-                const cardRect = clickedCard.getBoundingClientRect();
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-                
-                // Get viewport dimensions
-                const viewportWidth = window.innerWidth;
-                const viewportHeight = window.innerHeight;
-                
-                // Gallery dimensions
-                const galleryWidth = 1200;
-                const galleryHeight = 1500;
-                const margin = 40;
-                
-                let left, top;
-                
-                // Position on desktop/tablet
-                if (viewportWidth > 1600) {
-                    if (isEvenItem) {
-                        // Even items are on the right side, place gallery to the left
-                        left = Math.max(margin, cardRect.left - galleryWidth - margin + scrollLeft);
-                    } else {
-                        // Odd items are on the left side, place gallery to the right
-                        left = Math.min(viewportWidth - galleryWidth - margin, cardRect.right + margin + scrollLeft);
-                    }
-                    
-                    // Vertically align with the card, but ensure it stays within viewport
-                    top = Math.max(margin, Math.min(
-                        cardRect.top + scrollTop - 200, // Offset to better align with card
-                        scrollTop + viewportHeight - galleryHeight - margin
-                    ));
-                } else {
-                    // On smaller screens, center the gallery
-                    left = (viewportWidth - Math.min(galleryWidth, viewportWidth * 0.9)) / 2 + scrollLeft;
-                    top = (viewportHeight - Math.min(galleryHeight, viewportHeight * 0.9)) / 2 + scrollTop;
-                }
-                
-                // Apply positioning
-                this.gallery.style.left = `${left}px`;
-                this.gallery.style.top = `${top}px`;
-            }
-            
-            closeGallery() {
-                this.backdrop.classList.remove('active');
-                this.gallery.classList.remove('active');
-            }
-            
-            updateImage() {
-                if (this.currentImages.length === 0) return;
-                
-                this.galleryImage.src = this.currentImages[this.currentIndex];
-                this.galleryImage.alt = `${this.currentCoach} - Photo ${this.currentIndex + 1}`;
-                this.galleryCounter.textContent = `${this.currentIndex + 1} / ${this.currentImages.length}`;
-            }
-            
-            nextImage() {
-                if (this.currentImages.length === 0) return;
-                this.currentIndex = (this.currentIndex + 1) % this.currentImages.length;
-                this.updateImage();
-            }
-            
-            prevImage() {
-                if (this.currentImages.length === 0) return;
-                this.currentIndex = (this.currentIndex - 1 + this.currentImages.length) % this.currentImages.length;
-                this.updateImage();
-            }
-        }
-        
-        // Initialize gallery when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            new CoachGallery();
-        });
-    </script>
 </body>
 </html>

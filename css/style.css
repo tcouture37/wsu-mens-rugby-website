@@ -695,7 +695,7 @@ section h2::after {
     border-radius: var(--radius-lg);
     box-shadow: var(--card-shadow);
     padding: var(--space-2xl);
-    max-width: 500px;
+    max-width: 700px;
     margin: 0 auto;
     text-align: center;
 }
@@ -3346,11 +3346,11 @@ footer {
 }
 
 .timeline-item.founding .coach-left {
-    background: linear-gradient(135deg, #10b981, #059669);
+    background: none;
 }
 
 .timeline-item.founding .timeline-period {
-    background-color: #065f46;
+    background-color: var(--primary-color);
 }
 
 /* Mobile responsiveness */
