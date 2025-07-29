@@ -20,6 +20,7 @@
         .history-intro {
             text-align: center;
             margin-bottom: var(--space-2xl);
+            position: relative;
         }
 
         .history-intro h2 {
@@ -35,6 +36,33 @@
             max-width: 800px;
             margin: 0 auto;
             line-height: 1.7;
+        }
+
+        .dogg-mascot {
+            display: block;
+            margin: 0 auto var(--space-lg) auto;
+            width: 150px;
+            height: auto;
+            opacity: 1;
+        }
+
+        .historical-image {
+            max-width: 100%;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--card-shadow);
+            margin: var(--space-xl) 0;
+        }
+
+        .image-caption {
+            text-align: center;
+            font-style: italic;
+            color: var(--text-light);
+            font-size: var(--font-size-sm);
+            margin-top: var(--space-md);
+        }
+
+        .story-section {
+            margin-bottom: var(--space-xl);
         }
 
         .quote-container {
@@ -169,6 +197,14 @@
             .history-intro h2 {
                 font-size: var(--font-size-lg);
             }
+
+            .dogg-mascot {
+                width: 120px;
+            }
+
+            .historical-image {
+                margin: var(--space-lg) 0;
+            }
         }
 
         @media (max-width: 480px) {
@@ -199,11 +235,11 @@
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="team.html">Team</a></li>
-                    <li><a href="coaches.html">Coaches</a></li>
                     <li><a href="results.html">Results</a></li>
+                    <li><a href="coaches.html">Coaches</a></li>
                     <li><a href="history.html" class="active">History</a></li>
                     <li><a href="newsletter.html">Newsletter</a></li>
-                    <li><a href="social.html">Social</a></li>
+                    <li><a href="social.html">Socials</a></li>
                     <li><a href="donate.html">Donate</a></li>
                     <li><a href="https://www.worldrugbyshop.com/collections/winona-state-university">Shop</a></li>
                     <li><a href="contact.html">Contact</a></li>
@@ -222,6 +258,9 @@
 
     <section class="history-content">
         <div class="container">
+            <div class="history-intro">
+                <img src="images/dog_head.png" alt="Dogg Mascot" class="dogg-mascot">
+            </div>
 
             <div class="quote-container">
                 <div class="quote-header">
@@ -239,8 +278,14 @@
                         <br><br>The first game was that spring against UWL.....we got killed! Not due to lack of effort, but the mental aspect of knowing where one should be in comparison to ball movement. The next couple of games we played much better. The Doggs were starting to dig in. I think it was the forth game of the season before we had a win. Not that the win was pretty, but it was a Dogg style win. The first Doggs were a very mean bunch. Tough, and willing to give up their body for the cause. Soon the Doggs had established themselves as a VERY physical team in the state. The mental aspect of the game continued to improve during the 1st season, and during the summer with guys picking up games back home at tourneys.
 
                         <br><br>During the fall season of '89 the Doggs continued to improve, and also added some very good athletes to the team. The team was a serious contender to the state championship by the fall of '90. Dogg Rugby by that time was well known, and feared. The Doggs were not only the most physical team in the state, but becoming very game wise. Guys knew where to be, and what to do when they got there. If one of our 15 went down, we would bring in somebody that was just as good.
+                    </div>
 
-                        <br><br>The Doggs made it to the final four the fall of '90 (took 4th), and '91 (took 3rd). The following year '92 the Doggs won their 1st state championship. After that following spring '93 most of the original Doggs had left the pound. That was pretty much the end of the original Doggs era........
+                    <div style="text-align: center; margin: var(--space-xl) 0;">
+                        <img src="images/Shove_you_rookies.jpg" alt="Historic WSU Rugby Team Photo" class="historical-image">
+                    </div>
+
+                    <div class="quote-text" style="margin-top: var(--space-xl);">
+                        The Doggs made it to the final four the fall of '90 (took 4th), and '91 (took 3rd). The following year '92 the Doggs won their 1st state championship. After that following spring '93 most of the original Doggs had left the pound. That was pretty much the end of the original Doggs era........
                     </div>
 
                     <div class="quote-attribution">
