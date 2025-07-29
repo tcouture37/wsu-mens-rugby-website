@@ -1,16 +1,16 @@
 /* Reset and base styles */
 :root {
     /* Colors */
-    --primary-color: #0f172a;     /* Dark navy blue */
-    --primary-color-light: #1e293b;
-    --accent-color: #ffd700;      /* Gold */
-    --accent-color-dark: #e6c200;
-    --text-color: #1e293b;        /* Dark blue-gray */
-    --text-light: #64748b;        /* Light blue-gray */
-    --text-dark: #0f172a;         /* Very dark blue */
-    --bg-color: #f8fafc;          /* Very light gray */
-    --bg-color-secondary: #f1f5f9;
-    --card-bg: #ffffff;
+    --primary-color: #1a1a1a;     /* Black */
+    --primary-color-light: #4b4b4b;  /* Dark gray */
+    --accent-color: #6b46c1;      /* Purple */
+    --accent-color-dark: #553c9a;  /* Darker purple */
+    --text-color: #1a1a1a;        /* Black */
+    --text-light: #6b7280;        /* Medium gray */
+    --text-dark: #111827;         /* Very dark gray */
+    --bg-color: #f9fafb;          /* Very light gray */
+    --bg-color-secondary: #f3f4f6; /* Light gray */
+    --card-bg: #ffffff;           /* White */
     --card-shadow: 0 8px 16px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.03);
     
     /* Typography */
@@ -440,6 +440,7 @@ section h2::after {
 }
 
 /* Upcoming Matches */
+
 .matches-container {
     max-width: 900px;
     margin: 0 auto;
@@ -1966,6 +1967,10 @@ footer {
     margin: 0 auto;
 }
 
+.contact-info {
+    text-align: center;
+}
+
 .contact-info h3 {
     margin-bottom: var(--space-md);
     color: var(--primary-color);
@@ -1977,15 +1982,18 @@ footer {
 }
 
 .contact-details {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-md) var(--space-lg);
     margin-bottom: var(--space-xl);
+    justify-content: center;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .contact-item {
-    display: flex;
-    align-items: center;
+    display: contents;
 }
 
 .contact-icon {
@@ -1996,7 +2004,7 @@ footer {
     height: 50px;
     background-color: var(--accent-color);
     border-radius: 50%;
-    margin-right: var(--space-md);
+    align-self: start;
     flex-shrink: 0;
 }
 
@@ -2017,6 +2025,10 @@ footer {
     color: var(--text-light);
 }
 
+.social-connect {
+    text-align: center;
+}
+
 .social-connect h3 {
     margin-bottom: var(--space-md);
 }
@@ -2024,16 +2036,18 @@ footer {
 .social-connect .social-links {
     display: flex;
     gap: var(--space-md);
+    justify-content: center;
 }
 
 .social-connect .social-icon {
     width: 50px;
     height: 50px;
-    background-color: var(--primary-color-light);
+    background-color: var(--accent-color);
 }
 
 .social-connect .social-icon:hover {
-    background-color: var(--accent-color);
+    background-color: var(--primary-color);
+    transform: translateY(-3px);
 }
 
 .contact-form-container {
@@ -2183,16 +2197,8 @@ footer {
     box-shadow: var(--card-shadow);
 }
 
-.map-placeholder {
-    background-color: var(--card-bg);
-    height: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-light);
-    text-align: center;
-    padding: var(--space-lg);
+.map-container iframe {
+    border-radius: var(--radius-lg);
 }
 
 /* Donation Page Styles */
@@ -2207,11 +2213,140 @@ footer {
     text-align: center;
 }
 
-.donation-tiers {
+.donation-incentive {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.incentive-card {
+    background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+    color: white;
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    box-shadow: var(--card-shadow);
+}
+
+.incentive-card h3 {
+    margin-bottom: var(--space-md);
+    font-size: var(--font-size-lg);
+}
+
+.incentive-amount {
+    margin-bottom: var(--space-lg);
+}
+
+.amount-large {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: var(--space-xs);
+}
+
+.amount-small {
+    font-size: var(--font-size-md);
+    opacity: 0.9;
+}
+
+.incentive-benefit h4 {
+    margin-bottom: var(--space-sm);
+    font-size: var(--font-size-md);
+}
+
+.incentive-benefit p {
+    opacity: 0.9;
+}
+
+.donation-methods-section {
+    background-color: var(--bg-color-secondary);
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-2xl);
+}
+
+.donation-methods {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--space-lg);
-    margin-bottom: var(--space-2xl);
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: var(--space-xl);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.donation-method {
+    background-color: var(--card-bg);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.donation-method:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+}
+
+.method-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--bg-color-secondary);
+}
+
+.method-icon {
+    width: 50px;
+    height: 50px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.method-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: white;
+}
+
+.method-header h3 {
+    color: var(--primary-color);
+    margin-bottom: var(--space-xs);
+}
+
+.method-badge {
+    background-color: var(--accent-color);
+    color: white;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    margin-left: auto;
+}
+
+.method-details p {
+    margin-bottom: var(--space-sm);
+    color: var(--text-light);
+}
+
+.method-details strong {
+    color: var(--text-dark);
+}
+
+.method-details ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.method-details li {
+    padding: var(--space-xs) 0;
+    color: var(--text-light);
+}
+
+.method-details a {
+    color: var(--accent-color-dark);
+    font-weight: 600;
 }
 
 .donation-tier {
@@ -2431,62 +2566,44 @@ footer {
     stroke: var(--text-light);
 }
 
-.other-ways-section {
+.other-support-section {
     padding-top: var(--space-2xl);
     padding-bottom: var(--space-2xl);
 }
 
-.support-options {
+.support-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--space-lg);
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
 }
 
-.support-option {
+.support-item {
     background-color: var(--card-bg);
     border-radius: var(--radius-lg);
     padding: var(--space-lg);
     box-shadow: var(--card-shadow);
-    transition: transform 0.3s;
     text-align: center;
+    transition: transform 0.3s;
 }
 
-.support-option:hover {
+.support-item:hover {
     transform: translateY(-5px);
 }
 
-.support-icon {
-    width: 60px;
-    height: 60px;
-    background-color: var(--primary-color);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto var(--space-md);
-}
-
-.support-icon svg {
-    width: 30px;
-    height: 30px;
-    stroke: var(--accent-color);
-}
-
-.support-option h3 {
+.support-item h3 {
     margin-bottom: var(--space-md);
     color: var(--primary-color);
 }
 
-.support-option p {
+.support-item p {
     color: var(--text-light);
 }
 
-.support-option a {
+.support-item a {
     color: var(--accent-color-dark);
     font-weight: 600;
-    text-decoration: underline;
 }
 
 /* Animations */
@@ -3087,6 +3204,11 @@ footer {
     background-color: #fff8f9;
 }
 
+.social-media-button.youtube:hover {
+    border-color: #FF0000;
+    background-color: #fff8f8;
+}
+
 .social-icon-large {
     display: flex;
     align-items: center;
@@ -3103,6 +3225,10 @@ footer {
 
 .social-media-button.instagram .social-icon-large {
     background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+}
+
+.social-media-button.youtube .social-icon-large {
+    background-color: #FF0000;
 }
 
 .social-icon-large svg {
@@ -3298,6 +3424,17 @@ footer {
     object-fit: cover;
 }
 
+.coach-photos-dual {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+}
+
+.coach-photos-dual .coach-photo {
+    width: 120px;
+    height: 120px;
+}
+
 /* Coach info section */
 .coach-info h3 {
     color: var(--primary-color);
@@ -3429,6 +3566,11 @@ footer {
     .coach-photo {
         width: 120px;
         height: 120px;
+    }
+    
+    .coach-photos-dual .coach-photo {
+        width: 80px;
+        height: 80px;
     }
     
     .coach-info {
