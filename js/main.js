@@ -198,7 +198,7 @@ function setupLazyLoading() {
 function initAnimations() {
     // Scroll reveal animation for sections
     if ('IntersectionObserver' in window) {
-        const sections = document.querySelectorAll('section');
+        const sections = document.querySelectorAll('section:not(.results-section)');
         
         const sectionObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
