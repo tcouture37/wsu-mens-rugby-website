@@ -89,6 +89,196 @@ const playersData = [
             twitter: 'https://twitter.com/maddog_rugby'
         },
         bio: 'Energetic scrum-half who controls the pace of the game.'
+    },
+    {
+        id: 'ethan-forschler',
+        firstName: 'Ethan',
+        lastName: 'Forschler',
+        major: ['Movement Science'],
+        gradeLevel: 'freshman',
+        positions: ['Prop'],
+        socialMedia: {},
+        bio: ''
+    },
+    {
+        id: 'maxwell-wirtz',
+        firstName: 'Maxwell',
+        lastName: 'Aaron-Lawrence Wirtz',
+        major: ['Criminal Justice'],
+        gradeLevel: 'freshman',
+        positions: ['Prop'],
+        socialMedia: {},
+        bio: ''
+    },
+    {
+        id: 'conner-obryan',
+        firstName: 'Conner',
+        lastName: 'O\'Bryan',
+        major: ['Business Administration'],
+        gradeLevel: 'junior',
+        positions: ['Prop'],
+        socialMedia: {},
+        bio: ''
+    },
+    {
+        id: 'tanner-buth',
+        firstName: 'Tanner',
+        lastName: 'Buth',
+        major: ['Composite Material Engineering'],
+        gradeLevel: 'freshman',
+        positions: ['Prop'],
+        socialMedia: {},
+        bio: ''
+    },
+    {
+        id: 'aidan-luhmann',
+        firstName: 'Aidan',
+        lastName: 'Luhmann',
+        major: ['Psychology'],
+        gradeLevel: 'sophomore',
+        positions: ['Prop'],
+        socialMedia: {},
+        bio: ''
+    },
+    {
+        id: 'jorvik-jensen',
+        firstName: 'Jorvik',
+        lastName: 'Jensen',
+        major: ['Pre-Med', 'Cellular and Molecular Biology'],
+        gradeLevel: 'junior',
+        positions: ['Prop'],
+        socialMedia: {},
+        bio: ''
+    },
+    {
+        id: 'braden-koepp',
+        firstName: 'Braden',
+        lastName: 'Koepp',
+        major: ['Nursing'],
+        gradeLevel: 'freshman',
+        positions: ['Prop'],
+        socialMedia: {},
+        bio: ''
+    },
+    {
+        id: 'finley-leuning',
+        firstName: 'Finley',
+        lastName: 'Leuning',
+        major: ['Criminal Justice'],
+        gradeLevel: 'freshman',
+        positions: ['Prop'],
+        socialMedia: {},
+        bio: ''
+    },
+    {
+        id: 'sylas-flatin',
+        firstName: 'Sylas',
+        lastName: 'Flatin',
+        major: ['Nursing'],
+        gradeLevel: 'freshman',
+        positions: ['Prop'],
+        socialMedia: {},
+        bio: ''
+    },
+    {
+        id: 'abedalaziz-shehadeh',
+        firstName: 'Abedalaziz',
+        lastName: 'Shehadeh',
+        major: ['General Engineering: Electronics Concentration'],
+        gradeLevel: 'freshman',
+        positions: ['Prop'],
+        socialMedia: {},
+        bio: ''
+    },
+    {
+        id: 'kanta-masuda',
+        firstName: 'Kanta',
+        lastName: 'Masuda',
+        major: ['Exercise Science Strength and Conditioning'],
+        gradeLevel: 'junior',
+        positions: ['Prop'],
+        socialMedia: {},
+        bio: ''
+    },
+    {
+        id: 'harrison-klaphake',
+        firstName: 'Harrison',
+        lastName: 'Klaphake',
+        major: ['Special Education'],
+        gradeLevel: 'sophomore',
+        positions: ['Prop'],
+        socialMedia: {},
+        bio: ''
+    },
+    {
+        id: 'michael-reams',
+        firstName: 'Michael',
+        lastName: 'Reams',
+        major: ['Marketing', 'Business Law'],
+        gradeLevel: 'junior',
+        positions: ['Prop'],
+        socialMedia: {},
+        bio: ''
+    },
+    {
+        id: 'jared-sanchez',
+        firstName: 'Jared',
+        lastName: 'Milla Sanchez',
+        major: ['Social Work', 'Coaching'],
+        gradeLevel: 'junior',
+        positions: ['Prop'],
+        socialMedia: {},
+        bio: ''
+    },
+    {
+        id: 'cade-illg',
+        firstName: 'Cade',
+        lastName: 'Illg',
+        major: ['Applied and Professional Writing'],
+        gradeLevel: 'super-senior',
+        positions: ['Prop'],
+        socialMedia: {},
+        bio: ''
+    },
+    {
+        id: 'christopher-hopper',
+        firstName: 'Christopher',
+        lastName: 'Hopper',
+        major: ['General Engineering Physics and Electronics'],
+        gradeLevel: 'freshman',
+        positions: ['Prop'],
+        socialMedia: {},
+        bio: ''
+    },
+    {
+        id: 'logan-stewart',
+        firstName: 'Logan',
+        lastName: 'Stewart',
+        major: ['Statistics'],
+        gradeLevel: 'senior',
+        positions: ['Prop'],
+        socialMedia: {},
+        bio: ''
+    },
+    {
+        id: 'lincoln-brant',
+        firstName: 'Lincoln',
+        lastName: 'Brant',
+        major: ['Accounting'],
+        gradeLevel: 'sophomore',
+        positions: ['Prop'],
+        socialMedia: {},
+        bio: ''
+    },
+    {
+        id: 'kenneth-gama',
+        firstName: 'Kenneth',
+        lastName: 'Goroztieta Gama',
+        major: ['Applied and Professional Writing', 'Public Relations'],
+        gradeLevel: 'senior',
+        positions: ['Prop'],
+        socialMedia: {},
+        bio: ''
     }
 ];
 

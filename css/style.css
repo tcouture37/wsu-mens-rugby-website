@@ -2422,6 +2422,44 @@ footer {
     opacity: 0.95;
 }
 
+/* Single item layout for Alumni Ball */
+.reward-items.single-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: var(--space-lg) !important;
+}
+
+.reward-items.single-item .reward-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+}
+
+.reward-placeholder.alumni-ball-image {
+    width: auto !important;
+    height: auto !important;
+    max-width: 900px !important;
+    border: none !important;
+    background: transparent !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+}
+
+.reward-placeholder.alumni-ball-image img {
+    max-width: 900px !important;
+    max-height: none !important;
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    display: block !important;
+    margin: 0 auto !important;
+}
+
 .deadline-notice {
     margin-top: var(--space-lg);
     padding: var(--space-md);
@@ -2457,7 +2495,20 @@ footer {
         max-width: 40px;
         max-height: 40px;
     }
-    
+
+    .reward-placeholder.alumni-ball-image {
+        width: auto !important;
+        height: auto !important;
+    }
+
+    .reward-placeholder.alumni-ball-image img {
+        max-width: 600px !important;
+        max-height: none !important;
+        width: 100% !important;
+        display: block !important;
+        margin: 0 auto !important;
+    }
+
     .placeholder-text {
         font-size: 1.5rem;
     }
