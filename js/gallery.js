@@ -244,6 +244,16 @@ const playersData = [
         },
         bio: '',
         imageFileName: 'kenneth_gama.jpeg'
+    },
+    {
+        id: 'noah-poston',
+        firstName: 'Noah',
+        lastName: 'Poston',
+        major: ['Social Studies Secondary Education'],
+        gradeLevel: 'senior',
+        positions: ['Prop'],
+        socialMedia: {},
+        bio: ''
     }
 ];
 
