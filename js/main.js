@@ -259,43 +259,43 @@ document.addEventListener('DOMContentLoaded', function() {
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             let isValid = true;
-            
+
             // Basic email validation
             const emailInput = this.querySelector('input[type="email"]');
             if (emailInput && !validateEmail(emailInput.value)) {
                 isValid = false;
                 showError(emailInput, 'Please enter a valid email address');
             }
-            
+
             // Prevent form submission if validation fails
             if (!isValid) {
                 e.preventDefault();
             }
         });
-        
+
         function validateEmail(email) {
             const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return re.test(String(email).toLowerCase());
         }
-        
+
         function showError(input, message) {
             const formGroup = input.parentElement;
             const errorElement = formGroup.querySelector('.error-message') || document.createElement('div');
-            
+
             errorElement.className = 'error-message';
             errorElement.textContent = message;
-            
+
             if (!formGroup.querySelector('.error-message')) {
                 formGroup.appendChild(errorElement);
             }
-            
+
             input.classList.add('input-error');
         }
     }
-    
+
     // Results page functionality
     initResultsPage();
-    
+
     // Donation page functionality
     initDonationPage();
 });
