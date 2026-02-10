@@ -37,7 +37,6 @@
                     <li><a href="contact.html" class="active">Contact</a></li>
                 </ul>
             </div>
-            <!-- Dark mode toggle removed -->
         </nav>
     </header>
 
@@ -52,14 +51,14 @@
     <section class="contact-section">
         <div class="container">
             <h2>Reach Out</h2>
-            <div class="contact-grid">
+            <div class="contact-grid" style="display: block; max-width: 600px; margin: 0 auto;">
                 <div class="contact-info">
                     <h3>Contact Information</h3>
                     <p>Have questions about joining the team, upcoming matches, or anything else? We'd love to hear from you!</p>
-                    
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <div class="contact-icon">
+
+                    <div class="contact-details" style="display: block; max-width: none;">
+                        <div class="contact-item" style="display: block; position: relative; margin-bottom: 2rem; text-align: center;">
+                            <div class="contact-icon" style="position: absolute; left: 0; top: 0;">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                                     <polyline points="22,6 12,13 2,6"></polyline>
@@ -67,26 +66,25 @@
                             </div>
                             <div class="contact-text">
                                 <h4>Email</h4>
-                                <p>info@teamrugby.com</p>
-                                <p>coach@teamrugby.com</p>
+                                <p>alumni@wsumensrugby.com</p>
                             </div>
                         </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
+
+                        <div class="contact-item" style="display: block; position: relative; margin-bottom: 2rem; text-align: center;">
+                            <div class="contact-icon" style="position: absolute; left: 0; top: 0;">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                                 </svg>
                             </div>
                             <div class="contact-text">
                                 <h4>Phone</h4>
-                                <p>Team Captain: (123) 456-7890</p>
-                                <p>Coach: (123) 456-7891</p>
+                                <p>Team President: tba</p>
+                                <p>Coach: tba</p>
                             </div>
                         </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
+
+                        <div class="contact-item" style="display: block; position: relative; margin-bottom: 2rem; text-align: center;">
+                            <div class="contact-icon" style="position: absolute; left: 0; top: 0;">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path>
                                     <circle cx="12" cy="10" r="3"></circle>
@@ -98,9 +96,9 @@
                                 <p>1250 Homer Rd, Winona, MN 55987</p>
                             </div>
                         </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
+
+                        <div class="contact-item" style="display: block; position: relative; margin-bottom: 2rem; text-align: center;">
+                            <div class="contact-icon" style="position: absolute; left: 0; top: 0;">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                                     <line x1="16" y1="2" x2="16" y2="6"></line>
@@ -115,7 +113,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="social-connect">
                         <h3>Connect With Us</h3>
                         <div class="social-links">
@@ -139,40 +137,6 @@
                             </a>
                         </div>
                     </div>
-                </div>
-                
-                <div class="contact-form-container">
-                    <h3>Send Us a Message</h3>
-                    <form id="contact-form" action="#" method="POST">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <select id="subject" name="subject" required>
-                                <option value="" disabled selected>Choose a subject</option>
-                                <option value="joining">Joining the Team</option>
-                                <option value="schedule">Match Schedule</option>
-                                <option value="sponsorship">Sponsorship Inquiry</option>
-                                <option value="alumni">Alumni Connection</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="6" required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="submit-button">Send Message</button>
-                    </form>
                 </div>
             </div>
         </div>
