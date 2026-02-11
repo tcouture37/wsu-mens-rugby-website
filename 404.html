@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Winona State Men's Rugby</title>
+    <meta name="description" content="Page not found - Winona State University Men's Rugby team">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/coat_of_arms_01.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        .error-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 80px);
+            padding: var(--space-xl) var(--space-lg);
+            text-align: center;
+        }
+
+        .error-image {
+            max-width: 500px;
+            width: 100%;
+            height: auto;
+            margin-bottom: var(--space-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--card-shadow);
+        }
+
+        .error-title {
+            font-size: var(--font-size-2xl);
+            font-weight: 900;
+            color: var(--primary-color);
+            margin-bottom: var(--space-md);
+        }
+
+        .error-message {
+            font-size: var(--font-size-md);
+            color: var(--text-light);
+            margin-bottom: var(--space-xl);
+            max-width: 600px;
+        }
+
+        .error-buttons {
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: var(--space-md) var(--space-xl);
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            transition: all 0.3s ease;
+            font-size: var(--font-size-base);
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-color-light);
+            transform: translateY(-2px);
+        }
+
+        .cta-button.secondary {
+            background-color: var(--accent-color);
+        }
+
+        .cta-button.secondary:hover {
+            background-color: var(--accent-color-dark);
+        }
+
+        @media (max-width: 768px) {
+            .error-image {
+                max-width: 300px;
+            }
+
+            .error-title {
+                font-size: var(--font-size-xl);
+            }
+
+            .error-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .cta-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="main-nav">
+            <div class="logo">
+                <img src="images/coat_of_arms_01.png" alt="WSU Rugby Logo" class="logo-img">
+                <h1>WSU Men's Rugby</h1>
+            </div>
+            <div class="nav-container">
+                <button class="mobile-toggle" aria-label="Toggle navigation menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="coaches.html">Coaches</a></li>
+                    <li><a href="history.html">History</a></li>
+                    <li><a href="newsletter.html">Newsletter</a></li>
+                    <li><a href="social.html">Socials</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                    <li><a href="https://www.worldrugbyshop.com/collections/winona-state-university">Shop</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="error-container">
+        <img src="images/404b.png" alt="404 Error" class="error-image">
+        <h1 class="error-title">404: chaw not found</h1>
+    </section>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
