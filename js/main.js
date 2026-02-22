@@ -307,12 +307,12 @@ function initUpcomingMatches() {
     }
 }
 
-// Load upcoming matches from CSV
+// Load upcoming matches from JSON
 async function loadUpcomingMatches() {
     try {
-        const response = await fetch('match-results.csv');
-        const csvText = await response.text();
-        const matches = parseCSV(csvText);
+        const response = await fetch('match-results.json');
+        const rawMatches = await response.json();
+        const matches = rawMatches.map(m => ({ ...m, season: determineSeason(m.date), result: determineResult(m) }));
         
         // Filter for upcoming matches
         const now = new Date();
@@ -401,13 +401,15 @@ function initResultsPage() {
     }
 }
 
-// Load and parse match results from CSV
+// Load match results from JSON
 async function loadMatchResults() {
     try {
-        const response = await fetch('match-results.csv');
-        const csvText = await response.text();
-        const matches = parseCSV(csvText);
-        
+        const response = await fetch('match-results.json');
+        const rawMatches = await response.json();
+        const matches = rawMatches
+            .map(m => ({ ...m, season: determineSeason(m.date), result: determineResult(m) }))
+            .sort((a, b) => new Date(b.date) - new Date(a.date));
+
         displayResults(matches);
         setupSeasonFiltering(matches);
     } catch (error) {
@@ -416,81 +418,12 @@ async function loadMatchResults() {
     }
 }
 
-// Parse CSV data into match objects
-function parseCSV(csvText) {
-    const lines = csvText.trim().split('\n');
-    const headers = lines[0].split(',');
-    const matches = [];
-    
-    for (let i = 1; i < lines.length; i++) {
-        const values = parseCSVLine(lines[i]);
-        if (values.length >= 7) {
-            const match = {
-                date: values[0].trim(),
-                home: values[1].trim(),
-                away: values[2].trim(),
-                home_points: values[3].trim(),
-                away_points: values[4].trim(),
-                location: values[5].trim().replace(/^"|"$/g, ''), // Remove quotes from start and end
-                event: values[6].trim().replace(/^"|"$/g, '') // Remove quotes from start and end
-            };
-            
-            // Determine season and result for the match
-            match.season = determineSeason(match.date);
-            match.result = determineResult(match);
-            
-            matches.push(match);
-        }
-    }
-    
-    return matches.sort((a, b) => new Date(b.date) - new Date(a.date));
-}
-
-// Parse a single CSV line handling quoted values
-function parseCSVLine(line) {
-    const values = [];
-    let current = '';
-    let inQuotes = false;
-    
-    for (let i = 0; i < line.length; i++) {
-        const char = line[i];
-        
-        if (char === '"') {
-            inQuotes = !inQuotes;
-        } else if (char === ',' && !inQuotes) {
-            values.push(current);
-            current = '';
-        } else {
-            current += char;
-        }
-    }
-    
-    values.push(current); // Add the last value
-    return values;
-}
-
-// Determine season from date
+// Determine season from ISO date string
 function determineSeason(dateStr) {
     const date = new Date(dateStr);
-    if (isNaN(date)) {
-        // Handle different date formats
-        const parts = dateStr.split('/');
-        if (parts.length === 3) {
-            const month = parseInt(parts[0]);
-            const year = parseInt(parts[2]);
-            
-            if (month >= 8) {
-                return `${year}-${year + 1}`;
-            } else {
-                return `${year - 1}-${year}`;
-            }
-        }
-        return 'Unknown';
-    }
-    
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    
+    const year = date.getUTCFullYear();
+    const month = date.getUTCMonth() + 1;
+
     if (month >= 8) {
         return `${year}-${year + 1}`;
     } else {
