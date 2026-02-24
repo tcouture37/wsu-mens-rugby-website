@@ -343,7 +343,8 @@ function displayUpcomingMatches(matches) {
 
 // Create upcoming match card HTML
 function createUpcomingMatchCard(match) {
-    const matchDate = new Date(match.date);
+    const [y, mo, d] = match.date.split('-').map(Number);
+    const matchDate = new Date(y, mo - 1, d);
     const month = matchDate.toLocaleDateString('en-US', { month: 'short' });
     const day = matchDate.getDate();
     const year = matchDate.getFullYear();
@@ -646,12 +647,22 @@ function createMatchRow(match) {
 
 // Format date for display
 function formatDate(dateStr) {
+    // Parse YYYY-MM-DD as local time to avoid UTC offset shifting the day
+    const isoMatch = dateStr.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (isoMatch) {
+        const date = new Date(Number(isoMatch[1]), Number(isoMatch[2]) - 1, Number(isoMatch[3]));
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    }
     const date = new Date(dateStr);
     if (!isNaN(date)) {
-        return date.toLocaleDateString('en-US', { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
         });
     }
     
