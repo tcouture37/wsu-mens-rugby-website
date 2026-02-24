@@ -681,12 +681,15 @@ section h2::after {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
+.page-hero .newsletter-button {
+    margin-top: var(--space-xl);
+}
+
 
 /* Newsletter page styles */
 .newsletter-simple {
-    padding: var(--space-2xl) 5%;
+    padding: var(--space-xl) 5%;
     background-color: var(--bg-color);
-    min-height: 60vh;
     display: flex;
     align-items: center;
 }
@@ -695,7 +698,7 @@ section h2::after {
     background-color: var(--card-bg);
     border-radius: var(--radius-lg);
     box-shadow: var(--card-shadow);
-    padding: var(--space-2xl);
+    padding: var(--space-xl);
     max-width: 700px;
     margin: 0 auto;
     text-align: center;
@@ -851,6 +854,47 @@ section h2::after {
     color: var(--text-light);
     font-size: var(--font-size-sm);
     font-style: italic;
+}
+
+/* Past Newsletters */
+.past-newsletters {
+    padding: var(--space-xl) 5%;
+    background-color: var(--bg-color-secondary);
+}
+
+.past-newsletters h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: var(--space-lg);
+}
+
+.newsletter-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.newsletter-link {
+    display: block;
+    text-align: center;
+    padding: var(--space-md) var(--space-lg);
+    background-color: var(--card-bg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--card-shadow);
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--text-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.newsletter-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    color: var(--primary-color);
 }
 
 /* Footer */
