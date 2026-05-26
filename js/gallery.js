@@ -14,7 +14,7 @@ const playersData = [
         nickname: 'Eazizy',
         major: ['General Engineering: Electronics Concentration'],
         gradeLevel: 'freshman',
-        positions: ['Prop'],
+        positions: ['Wing'],
         socialMedia: {
             linkedin: 'https://www.linkedin.com/in/abedalaziz-shehadeh-1038233a8'
         },
@@ -27,7 +27,7 @@ const playersData = [
         lastName: 'Luhmann',
         major: ['Psychology'],
         gradeLevel: 'sophomore',
-        positions: ['Prop'],
+        positions: ['Outside Center'],
         socialMedia: {
             instagram: 'https://www.instagram.com/aidan_luh'
         },
@@ -40,7 +40,7 @@ const playersData = [
         lastName: 'Koepp',
         major: ['Nursing'],
         gradeLevel: 'freshman',
-        positions: ['Prop'],
+        positions: ['Hooker'],
         socialMedia: {
             facebook: 'https://www.facebook.com/braden.koepp/'
         },
@@ -53,7 +53,7 @@ const playersData = [
         lastName: 'Illg',
         major: ['Applied and Professional Writing'],
         gradeLevel: 'super-senior',
-        positions: ['Prop'],
+        positions: ['Lock'],
         socialMedia: {
             facebook: 'https://www.facebook.com/p/Cade-Illg-61580912365802/'
         },
@@ -66,7 +66,7 @@ const playersData = [
         lastName: 'Hopper',
         major: ['General Engineering Physics and Electronics'],
         gradeLevel: 'freshman',
-        positions: ['Center'],
+        positions: ['Fly-half'],
         socialMedia: {
             facebook: 'https://www.facebook.com/christopher.hopper.52090/'
         },
@@ -74,23 +74,12 @@ const playersData = [
         imageFileName: 'christopher_hopper.jpg'
     },
     {
-        id: 'conner-obryan',
-        firstName: 'Conner',
-        lastName: 'O\'Bryan',
-        major: ['Business Administration'],
-        gradeLevel: 'junior',
-        positions: ['Prop'],
-        socialMedia: {},
-        bio: '',
-        imageFileName: 'ConnerOBryan.JPG'
-    },
-    {
         id: 'ethan-forschler',
         firstName: 'Ethan',
         lastName: 'Forschler',
         major: ['Movement Science'],
         gradeLevel: 'freshman',
-        positions: ['Prop'],
+        positions: ['Lock'],
         socialMedia: {
             facebook: 'https://www.facebook.com/p/Ethan-Forschler-100095117594071/',
             instagram: 'https://www.instagram.com/ethanforschler/'
@@ -104,21 +93,10 @@ const playersData = [
         lastName: 'Leuning',
         major: ['Criminal Justice'],
         gradeLevel: 'freshman',
-        positions: ['Prop'],
+        positions: ['Hooker'],
         socialMedia: {},
         bio: '',
         imageFileName: 'FinleyLeuning.JPG'
-    },
-    {
-        id: 'harrison-klaphake',
-        firstName: 'Harrison',
-        lastName: 'Klaphake',
-        major: ['Special Education'],
-        gradeLevel: 'sophomore',
-        positions: ['Prop'],
-        socialMedia: {},
-        bio: '',
-        imageFileName: 'harrison_klaphake.png'
     },
     {
         id: 'jared-sanchez',
@@ -152,7 +130,7 @@ const playersData = [
         lastName: 'Jensen',
         major: ['Pre-Med', 'Cellular and Molecular Biology'],
         gradeLevel: 'junior',
-        positions: ['Prop'],
+        positions: ['Lock'],
         socialMedia: {
             linkedin: 'https://www.linkedin.com/in/jorvik-jensen-5b7967329/'
         },
@@ -165,7 +143,7 @@ const playersData = [
         lastName: 'Masuda',
         major: ['Exercise Science Strength and Conditioning'],
         gradeLevel: 'junior',
-        positions: ['Wing', 'Fullback'],
+        positions: ['Wing', 'Scrum-half'],
         socialMedia: {},
         bio: '',
         imageFileName: 'KantaMasuda.JPG'
@@ -176,7 +154,7 @@ const playersData = [
         lastName: 'Goroztieta Gama',
         major: ['Applied and Professional Writing', 'Public Relations'],
         gradeLevel: 'senior',
-        positions: ['Prop'],
+        positions: ['Fly-half'],
         socialMedia: {
             linkedin: 'https://www.linkedin.com/in/kenneth-goroztieta-gama-6ba04b255/',
             misc: 'https://kennethgoroztietaportfolio.weebly.com/'
@@ -190,7 +168,7 @@ const playersData = [
         lastName: 'Brandt',
         major: ['Accounting'],
         gradeLevel: 'sophomore',
-        positions: ['Prop'],
+        positions: ['Inside Center'],
         socialMedia: {
             instagram: 'https://www.instagram.com/lincolnbrandt12/'
         },
@@ -203,7 +181,7 @@ const playersData = [
         lastName: 'Stewart',
         major: ['Statistics'],
         gradeLevel: 'senior',
-        positions: ['Prop'],
+        positions: ['Fullback'],
         socialMedia: {
             linkedin: 'https://www.linkedin.com/in/logan-stewart-4b02ab356'
         },
@@ -211,12 +189,23 @@ const playersData = [
         imageFileName: 'LoganStewart.JPG'
     },
     {
+        id: 'mason-schneider',
+        firstName: 'Mason',
+        lastName: 'Schneider',
+        major: [''],
+        gradeLevel: 'freshman',
+        positions: ['Flanker'],
+        socialMedia: {},
+        bio: '',
+        imageFileName: 'MasonSchneider.JPG'
+    },
+    {
         id: 'maxwell-wirtz',
         firstName: 'Maxwell',
         lastName: 'Aaron-Lawrence Wirtz',
         major: ['Criminal Justice'],
         gradeLevel: 'freshman',
-        positions: ['Prop'],
+        positions: ['Fly-half'],
         socialMedia: {},
         bio: '',
         imageFileName: 'maxwell_wirtz.png'
@@ -227,7 +216,7 @@ const playersData = [
         lastName: 'Reams',
         major: ['Marketing', 'Business Law'],
         gradeLevel: 'junior',
-        positions: ['Prop'],
+        positions: ['Flanker'],
         socialMedia: {
             linkedin: 'https://www.linkedin.com/in/michael-reams-350754250',
             facebook: 'https://www.facebook.com/michael.reams.374/'
@@ -241,7 +230,7 @@ const playersData = [
         lastName: 'Poston',
         major: ['Social Studies Secondary Education'],
         gradeLevel: 'senior',
-        positions: ['Prop'],
+        positions: ['Number 8'],
         socialMedia: {},
         bio: '',
         imageFileName: 'NoahPoston.JPG'
@@ -252,7 +241,7 @@ const playersData = [
         lastName: 'Flatin',
         major: ['Nursing'],
         gradeLevel: 'freshman',
-        positions: ['Prop'],
+        positions: ['Flanker', 'Outside Center'],
         socialMedia: {},
         bio: '',
         imageFileName: 'sylas_flatin.jpg'
@@ -263,7 +252,7 @@ const playersData = [
         lastName: 'Buth',
         major: ['Composite Material Engineering'],
         gradeLevel: 'freshman',
-        positions: ['Prop'],
+        positions: ['Scrum-half'],
         socialMedia: {
             instagram: 'https://www.instagram.com/tannerbuth_/'
         },
@@ -275,7 +264,7 @@ const playersData = [
 // Position categories
 const positionCategories = {
     forwards: ['Prop', 'Hooker', 'Lock', 'Flanker', 'Number 8'],
-    backs: ['Scrum-half', 'Fly-half', 'Inside Centre', 'Outside Centre', 'Wing', 'Fullback']
+    backs: ['Scrum-half', 'Fly-half', 'Inside Center', 'Outside Center', 'Wing', 'Fullback']
 };
 
 // Current filter state
