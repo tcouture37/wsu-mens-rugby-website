@@ -3,25 +3,36 @@ name: Deploy to S3
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
+
+# Prevent overlapping deploys from racing on the bucket.
+concurrency:
+  group: deploy-main
+  cancel-in-progress: true
+
+# Required for GitHub's OIDC token so we can assume an AWS role with no
+# long-lived secrets. `contents: read` is the default checkout permission.
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
+      # Assumes the deploy role via GitHub OIDC — short-lived credentials,
+      # no stored secrets. Role trusts only pushes to main in this repo.
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: arn:aws:iam::362213993199:role/wsu-rugby-gh-deploy
           aws-region: us-east-1
 
       - name: Deploy to S3
         run: |
           aws s3 sync . s3://wsu-mens-rugby-website --delete --exclude ".git/*" --exclude ".github/*"
-          # If using a build directory, replace "." with your build directory
-          # Example: aws s3 sync ./build s3://wsu-mens-rugby-website --delete
 
       - name: Invalidate CloudFront cache
         run: aws cloudfront create-invalidation --distribution-id E3D9XCSIBE030X --paths "/*"
